@@ -13,6 +13,7 @@ alias grepl="grep --exclude-dir={vendor,node_modules,storage,public} --exclude=\
 alias d="docker"
 alias dc="docker-compose"
 alias dce="docker-compose exec"
+alias g="git"
 
 #-------------------------------------------------
 # FUNCTION
