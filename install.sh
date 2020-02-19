@@ -7,7 +7,10 @@ fi
 
 cp ./.emacs ~/.emacs && cp ./.emacs.d/init.org ~/.emacs.d/init.org
 
-echo -e "\nsource $(pwd)/.bashrc" >> ~/.bashrc
+bashrc_path="source $(pwd)/.bashrc"
+
+if ! grep -q "$bashrc_path" ~/.bashrc; then
+    echo -e "\n$bashrc_path" >> ~/.bashrc
+fi
 
 cp ./.gitconfig ~/.gitconfig
-
