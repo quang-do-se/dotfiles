@@ -1,4 +1,3 @@
-
 # EXPORTABLE PART
 
 #-------------------------------------------------
@@ -58,13 +57,14 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 #-------------------------------------------------
 # SSH SET UP
+
 # Add ssh to keychain to avoid password prompt everytime
 ssh-add -K ~/.ssh/id_rsa &>/dev/null
 
 #-------------------------------------------------
 # PROMPT BACKGROUND AND FOREGROUND
 
-SET="\[\e[0m\]"
+SET="\[\e[00m\]"
 RESET="\[\e[m\]"
 
 BG_RED="\[\e[41m\]"
@@ -73,11 +73,11 @@ BG_BLUE="\[\e[44m\]"
 BG_YELLOW="\[\e[43m\]"
 
 FG_BLACK="\[\e[30m\]"
-FG_GREEN="\[\e[1;32m\]" # 1; bold version of that color
-FG_BLUE="\[\e[1;34m\]" 
-FG_CYAN="\[\e[1;36m\]"
-FG_BRIGHT_GREEN='\[\e[0;92m\]'
-FG_YELLOW='\[\e[0;93m\]'
+FG_GREEN="\[\e[01;32m\]" # 1; bold version of that color
+FG_BLUE="\[\e[01;34m\]"
+FG_CYAN="\[\e[01;36m\]"
+FG_BRIGHT_GREEN='\[\e[00;92m\]'
+FG_YELLOW='\[\e[00;93m\]'
 
 FG_BOLD="\[\e[1m\]"
 FG_BOLD_RESET="\[\e[21m\]"
@@ -89,12 +89,6 @@ parse_git_branch() {
 export PS1="${SET}${FG_GREEN}\u@\h${RESET}${FG_BLUE} \w${FG_YELLOW}\$(parse_git_branch) ${RESET}\n${FG_CYAN}\$${RESET} "
 
 #-------------------------------------------------
-
-#-------------------------------------------------
-# Retake Ctrl-S in terminal
-stty stop ^j
-#-------------------------------------------------
-# END
 
 function cd_up() {
   cd $(printf "%0.s../" $(seq 1 $1 ));

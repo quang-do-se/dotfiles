@@ -1,0 +1,368 @@
+#+STARTUP: overview hidestars showall
+
+* Native
+** interface tweaks
+    #+BEGIN_SRC emacs-lisp
+      ;; prevent open tutorial window
+      (setq inhibit-startup-message t)
+
+      ;; prevent EOL conversion
+      (setq inhibit-eol-conversion nil)
+
+      ;; shorten confirm answers
+      (fset 'yes-or-no-p 'y-or-n-p)
+
+      ;; shortcut for refresh buffer
+      (global-set-key (kbd "<f5>") 'revert-buffer)
+
+      ;; auto revert buffer
+      (global-auto-revert-mode t)
+
+      (show-paren-mode 1)
+      (column-number-mode 1)
+      (global-subword-mode 1)
+
+      ;; replace when highlighting/marking
+      (delete-selection-mode 1)
+
+      (set-face-attribute 'default nil :height 280)
+
+      ;; map C-x C-b to ibuffer
+      (defalias 'list-buffers 'ibuffer-other-window)
+
+      (setq kill-ring-max 333)
+    #+END_SRC
+
+** window tweaks: default fullscreen, disable menubar & toolbar & scrollbar
+    #+BEGIN_SRC emacs-lisp
+      (menu-bar-mode -1)
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)
+
+      ;; fullscreen mode
+      (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+      ;; open new buffer vertically
+      (setq split-width-threshold 0)
+      (setq split-height-threshold nil)
+    #+END_SRC
+
+** terminal emacs
+    #+BEGIN_SRC emacs-lisp
+      ;; highlight in terminal mode
+      (transient-mark-mode t)
+
+      ;; UI app has different PATH from shell
+      (setenv "PATH" (concat "/usr/local/smlnj/bin:/usr/local/bin:" (getenv "PATH")))
+
+      (add-to-list 'exec-path "/usr/local/bin")
+      (add-to-list 'exec-path "/usr/local/smlnj/bin")
+
+      ;; (add-to-list 'load-path "~/.emacs.d/non-official-scripts/")
+    #+END_SRC
+
+** backup file
+    #+BEGIN_SRC emacs-lisp
+      (setq backup-by-copying t)
+      (setq backup-directory-alist '((".*" . "~/.saves/")))
+      (setq auto-save-file-name-transforms '((".*" "~/.saves/" t)))
+    #+END_SRC
+
+** tab
+    #+BEGIN_SRC emacs-lisp
+      ;; change tab to 4 spaces
+      (setq-default c-basic-offset 4
+                    tab-width 4
+                    indent-tabs-mode nil)
+
+      (global-set-key (kbd "TAB") 'tab-to-tab-stop)
+    #+END_SRC
+
+** ediff
+    #+BEGIN_SRC emacs-lisp
+      (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+      (setq ediff-split-window-function 'split-window-horizontally)
+      (setq ediff-make-buffers-readonly-at-startup t)
+    #+END_SRC
+
+* Packages
+** =use-package=
+    #+BEGIN_SRC emacs-lisp
+      (require 'package)
+
+      (setq package-enable-at-startup nil)
+
+      ;; add package repos
+      (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+      (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
+      ;; activate all the packages (in particular autoloads)
+      (package-initialize)
+
+      ;; install 'use-package' to easily install other packages
+      (unless (package-installed-p 'use-package)
+        (package-refresh-contents)
+        (package-install 'use-package))
+
+
+      ;; always ensure packages
+      (require 'use-package-ensure)
+      (setq use-package-always-ensure t)
+    #+END_SRC
+
+** =auto-compile=
+    #+BEGIN_SRC emacs-lisp
+      (use-package auto-compile
+        :config (auto-compile-on-load-mode))
+
+      (setq load-prefer-newer t)
+    #+END_SRC
+
+** =try=
+    #+BEGIN_SRC emacs-lisp
+      ;; install 'try' to try new package without installing
+      ;; use together with M-x describe-package
+      (use-package try)
+    #+END_SRC
+
+** =which-key= - key binding display helper
+    #+BEGIN_SRC emacs-lisp
+      (use-package which-key
+        :config
+        (which-key-mode))
+    #+END_SRC
+
+** programming modes - assign mode based on file extension
+    #+BEGIN_SRC emacs-lisp
+      (use-package web-mode)
+      (use-package php-mode)
+      (use-package sml-mode)
+
+      ;; assign mode based on file extension
+      (add-to-list 'auto-mode-alist '("\\.shl\\'" . shell-script-mode))
+      (add-to-list 'auto-mode-alist '("\\.sqr\\'" . sql-mode))
+      (add-to-list 'auto-mode-alist '("\\.pc\\'" . c-mode))
+      (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
+    #+END_SRC
+
+** =org-bullet mode= - display bullets nicely
+    #+BEGIN_SRC emacs-lisp
+      (use-package org-bullets
+        :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+    #+END_SRC
+
+** =yasnippet=
+    #+BEGIN_SRC emacs-lisp
+      (use-package yasnippet
+        :config
+        (setq yas/indent-line nil)
+        (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+        (yas-global-mode 1)
+        )
+    #+END_SRC
+
+** =term-mode=
+    #+BEGIN_SRC emacs-lisp
+      (defun term-switch-mode ()
+        (interactive)
+        (if (term-in-char-mode)
+            (term-line-mode)
+          (term-char-mode))
+        )
+
+      (add-hook 'term-mode-hook
+                (lambda()
+                  (setq yas-dont-activate t)
+                  (define-key term-mode-map (kbd "C-c x") 'term-switch-mode)
+                  (define-key term-raw-map (kbd "C-c x") 'term-switch-mode)
+                  ))
+
+      (use-package multi-term
+        :config
+        (setq multi-term-program "/bin/bash")
+        (global-set-key (kbd "C-c t") 'multi-term)
+        )
+    #+END_SRC
+
+** =ace-window= - jump between windows
+    #+BEGIN_SRC emacs-lisp
+      (use-package ace-window
+        :init
+        (progn
+          (global-set-key [remap other-window] 'ace-window)
+          (custom-set-faces
+           '(aw-leading-char-face
+             ((t (:inherit ace-jump-face-foreground :height 1.2 :foreground "#ff0000" :background "#ffffff")))))
+          (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+          (setq aw-background nil)
+          ))
+    #+END_SRC
+
+** =counsel=
+    #+BEGIN_SRC emacs-lisp
+      (use-package counsel)
+    #+END_SRC
+
+** =ivy=
+    #+BEGIN_SRC emacs-lisp
+      (use-package ivy
+        :diminish (ivy-mode)
+        :bind (("C-x b" . ivy-switch-buffer))
+        :config
+        (ivy-mode 1)
+        (setq ivy-use-virtual-buffers t)
+        (setq ivy-display-style 'fancy)
+        )
+    #+END_SRC
+
+** =swiper= - advanced search
+    #+BEGIN_SRC emacs-lisp
+      (use-package swiper
+        :bind (
+               ("C-s" . swiper)
+               ("C-r" . swiper)
+               ("C-c C-r" . ivy-resume)
+               ("M-x" . counsel-M-x)
+               ("C-x C-f" . counsel-find-file))
+        :config
+        (progn
+          (ivy-mode 1)
+          (setq ivy-use-virtual-buffers t)
+          (setq enable-recursive-minibuffers t)
+          (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+          (ivy-set-actions
+           'counsel-find-file
+           '(("j" find-file-other-window "other window")
+             ("x" counsel-find-file-extern "open externally")
+             ("r" counsel-find-file-as-root "open as root")
+             ("R" find-file-read-only "read only")
+             ("k" counsel-find-file-delete "delete")
+             ("c" counsel-find-file-copy "copy file")
+             ("m" counsel-find-file-move "move or rename")
+             ("d" counsel-find-file-mkdir-action "mkdir")))
+          )
+        )
+    #+END_SRC
+
+**  =avy= - go to char
+    #+BEGIN_SRC emacs-lisp
+      (use-package avy
+        :bind ("M-s" . avy-goto-char))
+    #+END_SRC
+
+** =auto-complete=
+    #+BEGIN_SRC emacs-lisp
+      (use-package auto-complete
+        :init
+        (progn
+          (ac-config-default)
+          (global-auto-complete-mode t)
+          ))
+    #+END_SRC
+
+** gruvbox-theme
+    #+BEGIN_SRC emacs-lisp
+      (use-package gruvbox-theme
+        :config (load-theme 'gruvbox t))
+    #+END_SRC
+
+** neotree
+    #+BEGIN_SRC emacs-lisp
+      (use-package neotree
+        :config
+
+        (defun neotree-project-dir ()
+          "Open NeoTree using the git root."
+          (interactive)
+          (let ((project-dir (projectile-project-root))
+                (file-name (buffer-file-name)))
+            (neotree-toggle)
+            (if project-dir
+                (if (neo-global--window-exists-p)
+                    (progn
+                      (neotree-dir project-dir)
+                      (neotree-find file-name)))
+              (message "Could not find git project root."))))
+
+        (defun neotree-buffer ()
+          "Open NeoTree using the current buffer."
+          (interactive)
+          (let ((file-name (buffer-file-name)))
+            (if file-name
+                (progn (neotree-dir (file-name-directory file-name)))
+              (progn (neotree-dir default-directory)))))
+
+        (global-set-key [f5] 'neotree-toggle)
+        (global-set-key [f6] 'neotree-project-dir)
+        (global-set-key [f7] 'neotree-buffer)
+
+        (setq neo-theme 'ascii)
+        )
+    #+END_SRC
+
+** =flycheck= - syntax checking
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck)
+    #+END_SRC
+
+** =browse-kill-ring=
+    #+BEGIN_SRC emacs-lisp
+      (use-package browse-kill-ring
+        :config (browse-kill-ring-default-keybindings))
+    #+END_SRC
+
+* Custom functions
+** tranpose lines
+    #+BEGIN_SRC emacs-lisp
+      (defun move-line-up ()
+        "Move up the current line."
+        (interactive)
+        (let ((this-column (current-column)))
+          (transpose-lines 1)
+          (forward-line -2)
+          (move-to-column this-column)
+          (indent-according-to-mode)))
+
+      (defun move-line-down ()
+        "Move down the current line."
+        (interactive)
+        (let ((this-column (current-column)))
+          (forward-line 1)
+          (transpose-lines 1)
+          (forward-line -1)
+          (move-to-column this-column)
+          (indent-according-to-mode)))
+    #+END_SRC
+
+** camel to underscore
+    #+BEGIN_SRC emacs-lisp
+      (defun camel-to-underscore ()
+        (interactive)
+        (progn
+          (replace-regexp
+           "\\([A-Z]\\)" "_\\1"
+           nil
+           (region-beginning)
+           (region-end))
+          (downcase-region
+           (region-beginning)
+           (region-end))))
+    #+END_SRC
+
+** switch to minibuffer
+    #+BEGIN_SRC emacs-lisp
+      (defun switch-to-minibuffer ()
+        "Switch to minibuffer window."
+        (interactive)
+        (if (active-minibuffer-window)
+            (select-window (active-minibuffer-window))
+          (error "Minibuffer is not active")))
+    #+END_SRC
+
+** key bindings
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key [(meta p)] 'move-line-up)
+      (global-set-key [(meta n)] 'move-line-down)
+      (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
+    #+END_SRC
