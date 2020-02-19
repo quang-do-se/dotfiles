@@ -72,8 +72,9 @@ BG_BLUE="\[\e[44m\]"
 BG_YELLOW="\[\e[43m\]"
 
 FG_BLACK="\[\e[30m\]"
-FG_GREEN="\[\e[32m\]"
-FG_CYAN="\[\e[36m\]"
+FG_GREEN="\[\e[1;32m\]" # 1; bold version of that color
+FG_BLUE="\[\e[1;34m\]" 
+FG_CYAN="\[\e[1;36m\]"
 FG_BRIGHT_GREEN='\[\e[0;92m\]'
 FG_YELLOW='\[\e[0;93m\]'
 
@@ -84,7 +85,7 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-export PS1="${SET}${BG_BRIGHT_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}${FG_BOLD}\$(parse_git_branch) ${RESET}\n${FG_CYAN}→${RESET} "
+export PS1="${SET}${FG_GREEN}\u@\h${RESET}${FG_BLUE} \w${FG_YELLOW}\$(parse_git_branch) ${RESET}\n${FG_CYAN}\$${RESET} "
 
 #-------------------------------------------------
 
