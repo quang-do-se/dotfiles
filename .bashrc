@@ -67,26 +67,25 @@ ssh-add -K ~/.ssh/id_rsa &>/dev/null
 SET="\[\e[00m\]"
 RESET="\[\e[m\]"
 
-BG_RED="\[\e[41m\]"
-BG_BRIGHT_RED="\[\e[101m\]"
-BG_BLUE="\[\e[44m\]"
-BG_YELLOW="\[\e[43m\]"
+# 01; bold version of that color
+# 38;5; foreground color
+# 48;5; background color
+BG_RED='\[\e[48;5;009m\]'
 
-FG_BLACK="\[\e[30m\]"
-FG_GREEN="\[\e[01;32m\]" # 1; bold version of that color
-FG_BLUE="\[\e[01;34m\]"
-FG_CYAN="\[\e[01;36m\]"
-FG_BRIGHT_GREEN='\[\e[00;92m\]'
-FG_YELLOW='\[\e[00;93m\]'
+FG_CYAN="\[\e[01;38;5;087m\]"
+FG_BRIGHT_GREEN='\[\e[01;38;5;118m\]'
+FG_YELLOW='\[\e[01;38;5;226m\]'
+FG_ORANGE='\[\e[01;38;5;214m\]'
+FG_WHITE='\[\e[01;38;5;231m\]'
 
-FG_BOLD="\[\e[1m\]"
+FG_BOLD="\[\e[01m\]"
 FG_BOLD_RESET="\[\e[21m\]"
 
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-export PS1="${SET}${FG_GREEN}\u@\h${RESET}${FG_BLUE} \w${FG_YELLOW}\$(parse_git_branch) ${RESET}\n${FG_CYAN}\$${RESET} "
+export PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}\$(parse_git_branch) ${RESET}\n${FG_CYAN}\$${RESET} "
 
 #-------------------------------------------------
 
