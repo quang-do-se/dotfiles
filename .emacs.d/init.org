@@ -33,6 +33,10 @@
       (setq kill-ring-max 333)
 
       (setq org-cycle-separator-lines 1)
+      (setq org-startup-truncated nil)
+
+      ;; Great 'line wrap' alternative for presentation
+      ;; (global-visual-line-mode)
     #+END_SRC
 
 ** window tweaks: default fullscreen, disable menubar & toolbar & scrollbar
