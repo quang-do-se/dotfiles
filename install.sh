@@ -13,4 +13,8 @@ if ! grep -q "$bashrc_path" ~/.bashrc; then
     echo -e "\n$bashrc_path" >> ~/.bashrc
 fi
 
+if [[ -f /root/.bashrc ]] && (! grep -q "$bashrc_path" /root/.bashrc); then
+    sudo echo -e "\n$bashrc_path" >> /root/.bashrc
+fi
+
 cp ./.gitconfig ~/.gitconfig
