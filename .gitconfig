@@ -1,48 +1,48 @@
 [user]
-    name = Q Do
-    email = quang.do.se@gmail.com
+  name = Q Do
+  email = quang.do.se@gmail.com
 
 [push]
-    default = simple
+  default = simple
 
 [core]
-    editor = emacs -nw
-    # `git show` invokes pager and uses editor that accepts stdin
-    pager = less
-    ignorecase = true
-    autocrlf = input
+  editor = emacs -nw
+  # `git show` invokes pager and uses editor that accepts stdin
+  pager = less
+  ignorecase = true
+  autocrlf = input
 
 [alias]
-	graph = log --pretty=oneline --abbrev-commit --graph --decorate --color --all
+  graph = log --pretty=oneline --abbrev-commit --graph --decorate --color --all
 
-    pulla = !git pull && git submodule update --init --recursive
+  pulla = !git pull && git submodule update --init --recursive
 
-    blt = branch --sort=committerdate
+  blt = branch --sort=committerdate
 
-    df = diff --name-only
+  df = diff --name-only
 
-    conflict = diff --name-only --diff-filter=U
+  conflict = diff --name-only --diff-filter=U
 
-    # Update a local branch to match a remote branch
-    bu = "!f() { git stash && git checkout -f ${1-master} && git fetch --all && git reset --hard origin/${1-master} && git checkout - && git rebase ${1-master}; }; f"
+  # Update a local branch to match a remote branch
+  bu = "!f() { git stash && git checkout -f ${1-master} && git fetch --all && git reset --hard origin/${1-master} && git checkout - && git rebase ${1-master}; }; f"
 
-    # Update a target branch and then rebase interactively with that branch
-    rbi = "!f() { git rebase -i $(git merge-base head ${1-master}); }; f"
+  # Update a target branch and then rebase interactively with that branch
+  rbi = "!f() { git rebase -i $(git merge-base head ${1-master}); }; f"
 
-    alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+  alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 
-    brt = ls-remote --heads --sort=committerdate
+  brt = ls-remote --heads --sort=committerdate
 
-    quotes = !echo "\\\"$HOME\\\"" "$HOME"  \"$HOME\" '\"$HOME\"' '"$HOME"' '$HOME'
+  quotes = !echo "\\\"$HOME\\\"" "$HOME"  \"$HOME\" '\"$HOME\"' '"$HOME"' '$HOME'
 
 [diff]
-    tool=e
+  tool=e
 
 [difftool "e"]
-    cmd = emacs -nw --eval \"(ediff-files \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
+  cmd = emacs -nw --eval \"(ediff-files \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
 
 [difftool]
-    prompt = false
+  prompt = false
 
 [init]
-    templatedir = ~/.git-template
+  templatedir = ~/.git-template

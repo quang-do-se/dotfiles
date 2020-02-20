@@ -81,10 +81,11 @@
 
 ** tab
     #+BEGIN_SRC emacs-lisp
-      ;; change tab to 4 spaces
-      (setq-default c-basic-offset 4
-                    tab-width 4
-                    indent-tabs-mode nil)
+      ;; change tab to 2 spaces
+      (setq-default c-basic-offset 2
+                    tab-width 2)
+
+      (setq-default indent-tabs-mode nil)
 
       (global-set-key (kbd "TAB") 'tab-to-tab-stop)
     #+END_SRC
