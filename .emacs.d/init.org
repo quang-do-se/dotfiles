@@ -32,6 +32,12 @@
 
       (setq kill-ring-max 333)
 
+      ;; always use unix line ending
+      (setq default-buffer-file-coding-system 'utf-8-unix)
+
+      ;; always show line ending which is not unix
+      (setq inhibit-eol-conversion t)
+
       ;; Great 'line wrap' alternative for presentation
       ;; (global-visual-line-mode)
     #+END_SRC

@@ -85,7 +85,7 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-export PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}\$(parse_git_branch) ${RESET}\n${FG_CYAN}\$${RESET} "
+export PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}\$(parse_git_branch)${RESET}\n${FG_CYAN}\$${RESET} "
 
 #-------------------------------------------------
 
