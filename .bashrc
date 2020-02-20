@@ -81,11 +81,24 @@ FG_WHITE='\[\e[01;38;5;231m\]'
 FG_BOLD="\[\e[01m\]"
 FG_BOLD_RESET="\[\e[21m\]"
 
-parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+get_git_prompt() {
+  git_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/')
+
+  git_status_count=$(git status -s | wc -l | sed -e 's/[[:space:]]*//')
+
+  if [ ${git_status_count} -eq 0 ]
+  then
+      git_status_count="✔"
+  else
+      git_status_count='▲'${git_status_count}
+  fi
+
+  git_stash_count='⚑'$(git stash list | wc -l | sed -e 's/[[:space:]]*//')
+
+  echo " (${git_branch}) ${git_status_count} ${git_stash_count}"
 }
 
-export PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}\$(parse_git_branch)${RESET}\n${FG_CYAN}\$${RESET} "
+export PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}\$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
 
 #-------------------------------------------------
 
