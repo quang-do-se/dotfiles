@@ -304,6 +304,8 @@
                 (progn (neotree-dir (file-name-directory file-name)))
               (progn (neotree-dir default-directory)))))
 
+        (setq neo-autorefresh nil)
+
         (global-set-key [f5] 'neotree-toggle)
         (global-set-key [f6] 'neotree-project-dir)
         (global-set-key [f7] 'neotree-buffer)
