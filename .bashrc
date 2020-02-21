@@ -129,7 +129,8 @@ set_bash_prompt() {
     PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
 }
 
-# append to PROMPT_COMMAND to avoid strange behavior
+# Note: append to PROMPT_COMMAND to keep default prompt behavior
+# use PROMPT_COMMAND to be able to reload the whole PS1 and refresh prompt color correctly
 PROMPT_COMMAND="set_bash_prompt; $PROMPT_COMMAND"
 
 #-------------------------------------------------
