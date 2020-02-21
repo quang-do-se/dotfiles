@@ -100,7 +100,7 @@ get_git_prompt() {
     
     if [ ${git_status_count} -eq 0 ]
     then
-        git_status_count="✓" # ✔
+        git_status_count="${FG_BRIGHT_GREEN}✓" # ✔
     else
         git_status_count='▲'${git_status_count}
     fi
@@ -121,10 +121,14 @@ get_git_prompt() {
     fi
 
     # squeeze spaces into single space | then remove all trailing spaces
-    echo " (${git_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
+    echo -e " (${git_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
 }
 
-export PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}\$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
+set_bash_prompt() {
+    PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}"$(get_git_prompt)"${RESET}\n${FG_CYAN}\$${RESET} "
+}
+
+PROMPT_COMMAND=set_bash_prompt
 
 #-------------------------------------------------
 
