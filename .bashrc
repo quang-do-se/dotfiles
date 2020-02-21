@@ -66,23 +66,23 @@ ssh-add -K ~/.ssh/id_rsa &>/dev/null
 #-------------------------------------------------
 # PROMPT BACKGROUND AND FOREGROUND
 
-SET="\[\e[00m\]"
-RESET="\[\e[m\]"
+SET="\033[00m"
+RESET="\033[m"
 
 # 01; bold version of that color
 # 38;5; foreground color
 # 48;5; background color
-BG_RED='\[\e[48;5;009m\]'
+BG_RED='\033[48;5;009m'
 
-FG_CYAN="\[\e[01;38;5;075m\]"
-FG_BRIGHT_GREEN='\[\e[01;38;5;118m\]'
-FG_YELLOW='\[\e[01;38;5;226m\]'
-FG_ORANGE='\[\e[01;38;5;214m\]'
-FG_WHITE='\[\e[01;38;5;231m\]'
-FG_RED='\[\e[01;38;5;009m\]'
+FG_CYAN="\033[01;38;5;075m"
+FG_BRIGHT_GREEN='\033[01;38;5;118m'
+FG_YELLOW='\033[01;38;5;226m'
+FG_ORANGE='\033[01;38;5;214m'
+FG_WHITE='\033[01;38;5;231m'
+FG_RED='\033[01;38;5;009m'
 
-FG_BOLD="\[\e[01m\]"
-FG_BOLD_RESET="\[\e[21m\]"
+FG_BOLD="\033[01m"
+FG_BOLD_RESET="\033[21m"
 
 get_git_prompt() {
     git_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/')
