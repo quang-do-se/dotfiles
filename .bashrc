@@ -101,7 +101,7 @@ get_git_prompt() {
     
     if [ ${git_status_count} -eq 0 ]
     then
-        git_status_count="${FG_BRIGHT_GREEN}✓" # ✔
+        git_status_count="${FG_BRIGHT_GREEN}✔" # ✔✓
     else
         git_status_count='▲'${git_status_count}
     fi
