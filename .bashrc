@@ -84,6 +84,7 @@ FG_BOLD_RESET="\[\e[21m\]"
 get_git_prompt() {
     git_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/')
 
+    # if there is no branch, don't display anything
     if [ -z ${git_branch} ]
     then
         echo ''
