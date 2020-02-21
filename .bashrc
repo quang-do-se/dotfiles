@@ -82,20 +82,45 @@ FG_BOLD="\[\e[01m\]"
 FG_BOLD_RESET="\[\e[21m\]"
 
 get_git_prompt() {
-  git_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/')
+    git_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/')
 
-  git_status_count=$(git status -s | wc -l | sed -e 's/[[:space:]]*//')
+    if [ -z ${git_branch} ]
+    then
+        echo ''
+        return 0
+    fi
+    
+    git_status_count=$(git status -s 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
 
-  if [ ${git_status_count} -eq 0 ]
-  then
-      git_status_count="✔"
-  else
-      git_status_count='▲'${git_status_count}
-  fi
+    git_stash_count=$(git stash list 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
 
-  git_stash_count='⚑'$(git stash list | wc -l | sed -e 's/[[:space:]]*//')
+    git_conflict_count=$(git diff --name-only --diff-filter=U 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
 
-  echo " (${git_branch}) ${git_status_count} ${git_stash_count}"
+    
+    if [ ${git_status_count} -eq 0 ]
+    then
+        git_status_count="✓" # ✔
+    else
+        git_status_count='▲'${git_status_count}
+    fi
+
+    if [ ${git_stash_count} -eq 0 ]
+    then
+        git_stash_count=''
+    else
+        git_stash_count='⚑'${git_stash_count}
+    fi
+
+
+    if [ ${git_conflict_count} -eq 0 ]
+    then
+        git_conflict_count=''
+    else
+        git_conflict_count='✗'${git_conflict_count}
+    fi
+
+    # squeeze spaces into single space | then remove all trailing spaces
+    echo " (${git_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
 }
 
 export PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}\$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
@@ -103,7 +128,7 @@ export PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YEL
 #-------------------------------------------------
 
 function cd_up() {
-  cd $(printf "%0.s../" $(seq 1 $1 ));
+    cd $(printf "%0.s../" $(seq 1 $1 ));
 }
 
 alias 'cd..'='cd_up'
