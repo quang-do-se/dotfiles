@@ -48,6 +48,15 @@
 
       ;; 'line wrap' for org-mode
       (setq org-startup-truncated nil)
+
+      (setq org-hide-emphasis-markers t)
+
+      (defun org-marker-toggle ()
+        (interactive)
+        (if org-hide-emphasis-markers
+            (setq org-hide-emphasis-markers nil)
+          (setq org-hide-emphasis-markers t))
+        );
     #+END_SRC
 
 ** window tweaks: default fullscreen, disable menubar & toolbar & scrollbar
