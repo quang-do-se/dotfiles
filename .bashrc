@@ -77,6 +77,7 @@ FG_BRIGHT_GREEN='\[\e[01;38;5;118m\]'
 FG_YELLOW='\[\e[01;38;5;226m\]'
 FG_ORANGE='\[\e[01;38;5;214m\]'
 FG_WHITE='\[\e[01;38;5;231m\]'
+FG_RED='\[\e[01;38;5;009m\]'
 
 FG_BOLD="\[\e[01m\]"
 FG_BOLD_RESET="\[\e[21m\]"
@@ -117,7 +118,7 @@ get_git_prompt() {
     then
         git_conflict_count=''
     else
-        git_conflict_count='✗'${git_conflict_count}
+        git_conflict_count="${FG_RED}✗"${git_conflict_count}
     fi
 
     # squeeze spaces into single space | then remove all trailing spaces
@@ -125,10 +126,11 @@ get_git_prompt() {
 }
 
 set_bash_prompt() {
-    PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}"$(get_git_prompt)"${RESET}\n${FG_CYAN}\$${RESET} "
+    PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
 }
 
-PROMPT_COMMAND=set_bash_prompt
+# append to PROMPT_COMMAND to avoid strange behavior
+PROMPT_COMMAND="set_bash_prompt; $PROMPT_COMMAND"
 
 #-------------------------------------------------
 
