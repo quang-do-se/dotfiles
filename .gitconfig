@@ -37,6 +37,9 @@
 
   quotes = !echo "\\\"$HOME\\\"" "$HOME"  \"$HOME\" '\"$HOME\"' '"$HOME"' '$HOME'
 
+  # get project root directory
+  pdir = rev-parse --show-toplevel
+
 [diff]
   tool=e
 

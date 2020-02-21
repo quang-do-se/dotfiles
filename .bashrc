@@ -13,6 +13,8 @@ alias d="docker"
 alias dc="docker-compose"
 alias dce="docker-compose exec"
 alias g="git"
+alias c="clear"
+alias cl="clear; source ~/.bash_profile; source ~/.bashrc"
 
 #-------------------------------------------------
 # FUNCTION
