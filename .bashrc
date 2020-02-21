@@ -72,7 +72,7 @@ RESET="\[\e[m\]"
 # 48;5; background color
 BG_RED='\[\e[48;5;009m\]'
 
-FG_CYAN="\[\e[01;38;5;087m\]"
+FG_CYAN="\[\e[01;38;5;075m\]"
 FG_BRIGHT_GREEN='\[\e[01;38;5;118m\]'
 FG_YELLOW='\[\e[01;38;5;226m\]'
 FG_ORANGE='\[\e[01;38;5;214m\]'
