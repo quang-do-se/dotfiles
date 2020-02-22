@@ -94,7 +94,7 @@ FG_BOLD=$(prompt_color_escape '01')
 FG_BOLD_RESET=$(prompt_color_escape '21')
 
 get_git_prompt() {
-    git_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/')
+    git_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/' -e 's/HEAD detached at /\:/')
 
     # if there is no branch, don't display anything
     # quote the variable in case of string with multiple words
@@ -103,7 +103,7 @@ get_git_prompt() {
         echo ''
         return 0
     fi
-    
+
     git_status_count=$(git status -s 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
 
     git_stash_count=$(git stash list 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
