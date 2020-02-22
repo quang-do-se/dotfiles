@@ -55,7 +55,11 @@ export HISTFILE=~/.bash_eternal_history
 
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+if ! grep -q 'history -a' <<< "${PROMPT_COMMAND}";
+then
+    PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+fi
 
 #-------------------------------------------------
 # SSH SET UP
@@ -139,7 +143,11 @@ set_bash_prompt() {
 
 # Note: append to PROMPT_COMMAND to keep default prompt behavior
 # use PROMPT_COMMAND to be able to reload the whole PS1 and refresh prompt color correctly
-PROMPT_COMMAND="set_bash_prompt; $PROMPT_COMMAND"
+if ! grep -q 'set_bash_prompt' <<< "${PROMPT_COMMAND}";
+then
+    PROMPT_COMMAND="set_bash_prompt; $PROMPT_COMMAND"
+fi
+
 
 #-------------------------------------------------
 
