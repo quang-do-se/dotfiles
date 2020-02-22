@@ -87,7 +87,6 @@ FG_RED=$(prompt_color_escape '01;38;5;009')
 
 FG_BOLD=$(prompt_color_escape '01')
 FG_BOLD_RESET=$(prompt_color_escape '21')
->>>>>>> Stashed changes
 
 get_git_prompt() {
     git_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/')
