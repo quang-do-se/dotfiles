@@ -71,11 +71,11 @@ ssh-add -K ~/.ssh/id_rsa &>/dev/null
 # PROMPT BACKGROUND AND FOREGROUND
 
 prompt_color_escape() {
-  echo '\e['$@'m\]'
-  # echo '\033['$@'m'
+  # echo '\[\e['$@'m\]'
+  echo '\033['$@'m'
 }
 
-SET=$(prompt_color_escape '00')
+set=$(prompt_color_escape '00')
 RESET=$(prompt_color_escape '')
 
 # 01; bold version of that color
