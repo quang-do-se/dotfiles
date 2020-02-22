@@ -67,7 +67,8 @@ ssh-add -K ~/.ssh/id_rsa &>/dev/null
 # PROMPT BACKGROUND AND FOREGROUND
 
 prompt_color_escape() {
-  echo '\[\e['$@'m\]'
+  echo '\e['$@'m\]'
+  # echo '\033['$@'m'
 }
 
 SET=$(prompt_color_escape '00')
@@ -92,7 +93,8 @@ get_git_prompt() {
     git_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/')
 
     # if there is no branch, don't display anything
-    if [ -z ${git_branch} ]
+    # quote the variable in case of string with multiple words
+    if [ -z "${git_branch}" ]
     then
         echo ''
         return 0
