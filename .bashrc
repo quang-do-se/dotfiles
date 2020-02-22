@@ -110,10 +110,9 @@ get_git_prompt() {
 
     git_conflict_count=$(git diff --name-only --diff-filter=U 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
 
-    
     if [ ${git_status_count} -eq 0 ]
     then
-        git_status_count="${FG_BRIGHT_GREEN}✔" # ✔✓
+        git_status_count=${FG_BRIGHT_GREEN}'✔' # ✔✓
     else
         git_status_count='▲'${git_status_count}
     fi
@@ -125,16 +124,15 @@ get_git_prompt() {
         git_stash_count='⚑'${git_stash_count}
     fi
 
-
     if [ ${git_conflict_count} -eq 0 ]
     then
         git_conflict_count=''
     else
-        git_conflict_count="${FG_RED}✗"${git_conflict_count}
+        git_conflict_count=${FG_RED}'✗'${git_conflict_count}
     fi
 
     # squeeze spaces into single space | then remove all trailing spaces
-    echo -e " (${git_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
+    echo " (${git_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
 }
 
 set_bash_prompt() {
