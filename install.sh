@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ ! -d "~/.emacs.d/snippets" ]
 then
@@ -10,11 +10,11 @@ cp ./.emacs ~/.emacs && cp ./.emacs.d/init.org ~/.emacs.d/init.org
 bashrc_path="source $(pwd)/.bashrc"
 
 if ! grep -q "$bashrc_path" ~/.bashrc; then
-    echo -e "\n$bashrc_path" >> ~/.bashrc
+    printf "\n%s" "$bashrc_path" >> ~/.bashrc
 fi
 
-if [[ -f /root/.bashrc ]] && (! grep -q "$bashrc_path" /root/.bashrc); then
-    sudo echo -e "\n$bashrc_path" >> /root/.bashrc
+if (sudo test -f /root/.bashrc) && (! grep -q "$bashrc_path" /root/.bashrc); then
+    sudo printf "\n%s" "$bashrc_path" >> /root/.bashrc
 fi
 
 cp ./.gitconfig ~/.gitconfig

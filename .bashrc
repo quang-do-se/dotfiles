@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # EXPORTABLE PART
 
 #-------------------------------------------------
@@ -100,7 +102,6 @@ get_git_prompt() {
     # quote the variable in case of string with multiple words
     if [ -z "${git_branch}" ]
     then
-        echo ''
         return 0
     fi
 
