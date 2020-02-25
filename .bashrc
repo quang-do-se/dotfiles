@@ -14,9 +14,11 @@ alias grepl="grep --exclude-dir={vendor,node_modules,storage,public} --exclude=\
 alias d="docker"
 alias dc="docker-compose"
 alias dce="docker-compose exec"
-alias g="git"
 alias c="clear"
 alias cl="clear; source ~/.bashrc || source ~/.bash_profile"
+
+alias g="git"
+__git_complete g __git_main # map git completion to 'g'
 
 #-------------------------------------------------
 # FUNCTION
