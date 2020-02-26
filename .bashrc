@@ -16,7 +16,7 @@ alias dc="docker-compose"
 alias dce="docker-compose exec"
 alias c="clear"
 alias cl="clear; source ~/.bashrc || source ~/.bash_profile"
-
+alias all-functions="compgen -c"
 alias g="git"
 
 # map git completion to 'g'
