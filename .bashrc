@@ -18,7 +18,10 @@ alias c="clear"
 alias cl="clear; source ~/.bashrc || source ~/.bash_profile"
 
 alias g="git"
-__git_complete g __git_main # map git completion to 'g'
+
+# map git completion to 'g'
+__git_complete g __git_main 2>/dev/null # mac
+complete -o default -o nospace -F _git g 2>/dev/null # linux
 
 #-------------------------------------------------
 # FUNCTION
