@@ -103,15 +103,33 @@ FG_BOLD=$(prompt_color_escape '01')
 FG_BOLD_RESET=$(prompt_color_escape '21')
 
 get_git_prompt() {
-    git_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/' -e 's/^[Hh][Ee][Aa][Dd] detached at /\:/')
+    current_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/' -e 's/^[Hh][Ee][Aa][Dd] detached at /\
+:/')
 
     # if there is no branch, don't display anything
     # quote the variable in case of string with multiple words
-    if [ -z "${git_branch}" ]
+    if [ -z "${current_branch}" ]
     then
         return 0
     fi
 
+    remote_tracking_branch=$(git for-each-ref --format='%(upstream:short)' "$(git symbolic-ref -q HEAD)" 2>/dev/null);
+
+    if [ ! -z "${remote_tracking_branch}" ]
+    then
+        read ahead behind <<< $(git rev-list --left-right --count ${current_branch}...${remote_tracking_branch} 2>/dev/null)
+
+        if [ ${ahead} -gt 0 ]
+        then
+            current_branch=${current_branch}' ↑'${ahead}
+        fi
+
+        if [ ${behind} -gt 0 ]
+        then
+            current_branch=${current_branch}' ↓'${behind}
+        fi
+    fi
+    
     git_status_count=$(git status -s 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
 
     git_stash_count=$(git stash list 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
@@ -140,7 +158,7 @@ get_git_prompt() {
     fi
 
     # squeeze spaces into single space | then remove all trailing spaces
-    echo " (${git_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
+    echo " (${current_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
 }
 
 set_bash_prompt() {
