@@ -17,6 +17,7 @@ alias dce="docker-compose exec"
 alias c="clear"
 alias cl="clear; source ~/.bashrc || source ~/.bash_profile"
 alias all-functions="compgen -c"
+alias cdg="cd_git_project"
 alias g="git"
 
 # map git completion to 'g'
@@ -25,16 +26,24 @@ complete -o default -o nospace -F _git g 2>/dev/null # linux
 
 #-------------------------------------------------
 # FUNCTION
+cd_git_project() {
+    pdir=$(g pdir 2>/dev/null)
+    
+    if [ ! -z "${pdir}" ]
+    then
+        cd "${pdir}"
+    fi
+}
 
-ev(){
+ev() {
     emacs "$1" --eval '(setq buffer-read-only t)'
 }
 
-trash(){
+trash() {
     mv "$@" ~/.Trash/
 }
 
-gitgraph(){
+gitgraph() {
     args=""
     while [ "$1" != "" ]; do
         case $1 in
