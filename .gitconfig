@@ -21,6 +21,8 @@
 
   df = diff --name-only
 
+  dt = difftool
+  
   conflict = diff --name-only --diff-filter=U
 
   conflict-check = diff --check
