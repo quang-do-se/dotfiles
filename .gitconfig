@@ -21,6 +21,8 @@
 
   c = commit
 
+  cm = commit -m
+
   ch = checkout
 
   s = status
