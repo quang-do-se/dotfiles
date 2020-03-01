@@ -17,12 +17,20 @@
 
   pulla = !git pull && git submodule update --init --recursive
 
+  a = add
+
+  c = commit
+
+  ch = checkout
+
+  s = status
+
   blt = branch --sort=committerdate
 
   df = diff --name-only
 
   dt = difftool
-  
+
   conflict = diff --name-only --diff-filter=U
 
   conflict-check = diff --check
