@@ -21,8 +21,11 @@ alias cdg="cd_git_project"
 alias g="git"
 
 # map git completion to 'g'
+source /etc/bash_completion.d/git 2>/dev/null
+source /usr/share/bash-completion/completions/git 2>/dev/null
+
 __git_complete g __git_main 2>/dev/null # mac
-complete -o default -o nospace -F _git g 2>/dev/null # linux
+complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null # linux
 
 #-------------------------------------------------
 # FUNCTION

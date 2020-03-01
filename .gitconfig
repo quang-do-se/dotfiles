@@ -21,19 +21,21 @@
 
   au = add -u
 
+  blt = branch --sort=committerdate
+  
   c = commit
 
   cm = commit -m
 
   ch = checkout
 
-  s = status
-
-  blt = branch --sort=committerdate
+  d = diff
 
   df = diff --name-only
 
   dt = difftool
+
+  s = status
 
   conflict = diff --name-only --diff-filter=U
 
