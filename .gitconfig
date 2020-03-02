@@ -37,6 +37,8 @@
 
   d = diff
 
+  dc = diff --cached
+
   df = diff --name-only
 
   dt = difftool
