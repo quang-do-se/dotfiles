@@ -35,6 +35,10 @@
 
   ch = checkout
 
+  chb = checkout -b
+
+  chm = checkout master
+
   d = diff
 
   dc = diff --cached
