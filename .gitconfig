@@ -19,6 +19,8 @@
 
   a = add
 
+  aa = add .
+
   au = add -u
 
   blt = branch --sort=committerdate
