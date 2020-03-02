@@ -17,6 +17,10 @@
 
   pulla = !git pull && git submodule update --init --recursive
 
+  pushr = push -u origin HEAD
+
+  pushf = push -f
+
   a = add
 
   aa = add .
@@ -24,7 +28,7 @@
   au = add -u
 
   blt = branch --sort=committerdate
-  
+
   c = commit
 
   cm = commit -m
@@ -47,7 +51,7 @@
   bu = "!f() { git stash && git checkout -f ${1-master} && git fetch --all && git reset --hard origin/${1-master} && git checkout - && git rebase ${1-master}; }; f"
 
   # Update a target branch and then rebase interactively with that branch
-  rbi = "!f() { git rebase -i $(git merge-base head ${1-master}); }; f"
+  rbi = "!f() { git rebase -i $(git merge-base HEAD ${1-master}); }; f"
 
   alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 
