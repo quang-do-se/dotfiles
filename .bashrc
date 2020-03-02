@@ -14,6 +14,7 @@ alias grepl="grep --exclude-dir={vendor,node_modules,storage,public} --exclude=\
 alias d="docker"
 alias dc="docker-compose"
 alias dce="docker-compose exec"
+alias d-stop-all="docker-container-stop-all"
 alias c="clear"
 alias cl="clear; source ~/.bashrc || source ~/.bash_profile"
 alias all-functions="compgen -c"
@@ -29,8 +30,12 @@ complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null # linux
 
 #-------------------------------------------------
 # FUNCTION
+docker-container-stop-all() {
+    docker container stop $(docker container ls -qa)
+}
+
 cd_git_project() {
-    pdir=$(g pdir 2>/dev/null)
+    pdir=$(git rev-parse --show-toplevel 2>/dev/null)
     
     if [ ! -z "${pdir}" ]
     then
