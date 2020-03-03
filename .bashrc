@@ -120,8 +120,7 @@ FG_BOLD=$(prompt_color_escape '01')
 FG_BOLD_RESET=$(prompt_color_escape '21')
 
 get_git_prompt() {
-    current_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/' -e 's/^[Hh][Ee][Aa][Dd] detached at /\
-:/')
+    current_branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/)*$//' -e 's/* (*\(.*\)/\1/' -e 's/^[Hh][Ee][Aa][Dd] detached at /:/')
 
     # if there is no branch, don't display anything
     # quote the variable in case of string with multiple words
