@@ -47,6 +47,8 @@
 
   dt = difftool
 
+  f = fetch
+
   s = status
 
   conflict = diff --name-only --diff-filter=U
