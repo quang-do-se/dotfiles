@@ -347,6 +347,11 @@
         :config (browse-kill-ring-default-keybindings))
     #+END_SRC
 
+** =typescript-mode=
+    #+BEGIN_SRC emacs-lisp
+      (use-package typescript-mode)
+    #+END_SRC
+
 * Custom functions
 ** tranpose lines
     #+BEGIN_SRC emacs-lisp
