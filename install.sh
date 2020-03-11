@@ -17,6 +17,10 @@ sudo sh <<EOF
 if (test -f /root/.bashrc) && (! grep -q "$bashrc_path" /root/.bashrc); then
   printf "\n%s" "$bashrc_path" >> /root/.bashrc
 fi
+
+if (test -d /root); then
+  cp ./.gitconfig /root/.gitconfig
+fi
 EOF
 
 cp ./.gitconfig ~/.gitconfig
