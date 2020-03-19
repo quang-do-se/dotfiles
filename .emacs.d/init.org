@@ -104,6 +104,11 @@
       (setq-default indent-tabs-mode nil)
 
       (global-set-key (kbd "TAB") 'tab-to-tab-stop)
+
+      (add-hook 'python-mode-hook
+                (lambda ()
+                  (setq tab-width 2)
+                  (setq python-indent-offset 2)))
     #+END_SRC
 
 ** ediff
