@@ -68,6 +68,9 @@
       ;; fullscreen mode
       (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+      ;; for MacOS
+      (toggle-frame-fullscreen)
+
       ;; open new buffer vertically
       (setq split-width-threshold 0)
       (setq split-height-threshold nil)
