@@ -18,8 +18,8 @@ if ! grep -q "$source_path" ~/.profile; then
 fi
 
 sudo sh <<EOF
-if [ -f /root/.bashrc ] && [ ! grep -q "$bashrc_path" /root/.bashrc ] ; then
-  printf "\n%s" "$bashrc_path" >> /root/.bashrc
+if [ -f /root/.bashrc ] && ! grep -q "$source_path" /root/.bashrc ; then
+  printf "\n%s" "$source_path" >> /root/.bashrc
 fi
 
 if [ -d /root ] ; then
