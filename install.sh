@@ -7,18 +7,22 @@ fi
 
 cp ./.emacs ~/.emacs && cp ./.emacs.d/init.org ~/.emacs.d/init.org
 
-bashrc_path="source $(pwd)/.bashrc"
+source_path="source $(pwd)/shell"
 
-if ! grep -q "$bashrc_path" ~/.bashrc; then
-    printf "\n%s" "$bashrc_path" >> ~/.bashrc
+if ! grep -q "$source_path" ~/.bashrc; then
+    printf "\n%s" "$source_path" >> ~/.bashrc
+fi
+
+if ! grep -q "$source_path" ~/.profile; then
+    printf "\n%s" "$source_path" >> ~/.profile
 fi
 
 sudo sh <<EOF
-if (test -f /root/.bashrc) && (! grep -q "$bashrc_path" /root/.bashrc); then
+if [ -f /root/.bashrc ] && [ ! grep -q "$bashrc_path" /root/.bashrc ] ; then
   printf "\n%s" "$bashrc_path" >> /root/.bashrc
 fi
 
-if (test -d /root); then
+if [ -d /root ] ; then
   cp ./.gitconfig /root/.gitconfig
 fi
 EOF

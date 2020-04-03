@@ -16,7 +16,7 @@ alias dc="docker-compose"
 alias dce="docker-compose exec"
 alias d-stop-all="docker-container-stop-all"
 alias c="clear"
-alias cl="clear; (test -f ~/.bashrc && source ~/.bashrc) || (test -f ~/.bash_profile && source ~/.bash_profile)"
+alias cl="clear; { test -f ~/.bashrc && source ~/.bashrc; } || { test -f ~/.bash_profile && source ~/.bash_profile; } || { test -f ~/.profile && source ~/.profile; }"
 alias all-functions="compgen -c"
 alias cdg="cd_git_project"
 alias g="git"
@@ -178,7 +178,7 @@ get_git_prompt() {
 }
 
 set_bash_prompt() {
-    PS1="${SET}${FG_WHITE}${BG_RED}\u@\h${RESET}${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
+    PS1="${SET}${FG_WHITE}${BG_RED}\u${RESET}${FG_CYAN} \A${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
 }
 
 # Note: append to PROMPT_COMMAND to keep default prompt behavior
