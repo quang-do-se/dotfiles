@@ -65,10 +65,10 @@
       (tool-bar-mode -1)
       (scroll-bar-mode -1)
 
-      ;; fullscreen mode
-      (add-to-list 'default-frame-alist '(fullscreen . maximized))
+      ;; fullscreen mode - does not work with Mac
+      ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-      ;; for MacOS
+      ;; work both in Mac and Ubuntu
       (toggle-frame-fullscreen)
 
       ;; open new buffer vertically
