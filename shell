@@ -5,6 +5,8 @@ alias rm="rm -i"
 alias rmd="rm -rfi"
 alias emacs="emacs -nw"
 alias ek="emacsclient -e '(kill-emacs)'"
+alias ev="emacsclient-read-only"
+alias em="emacsclient-edit"
 alias grepl="grep --exclude-dir={vendor,node_modules,storage,public} --exclude=\*.{lock,git,scss}"
 alias d="docker"
 alias dc="docker-compose"
@@ -40,13 +42,13 @@ cd_git_project() {
 
 # run emacs in daemon mode inside terminal
 export ALTERNATE_EDITOR=""
-export EDITOR="ee"
+export EDITOR="emacsclient-edit"
 
-ev() {
+emacsclient-read-only() {
     emacsclient -q -u -nw -e "(find-file-read-only \"$1\")" 2>/dev/null
 }
 
-ee() {
+emacsclient-edit() {
     emacsclient -q -u $1 2>/dev/null
 }
 
