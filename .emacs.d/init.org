@@ -30,6 +30,9 @@
       ;; map C-x C-b to ibuffer
       (defalias 'list-buffers 'ibuffer-other-window)
 
+      ;; don't ask when killing unmodified buffer
+      (setq ibuffer-expert t)
+
       (setq kill-ring-max 333)
 
       ;; always use unix line ending

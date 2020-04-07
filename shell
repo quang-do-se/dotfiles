@@ -1,15 +1,10 @@
 #!/bin/sh
 
-# EXPORTABLE PART
-
-#-------------------------------------------------
-export EDITOR="emacs"
-
 # ALIAS
 alias rm="rm -i"
 alias rmd="rm -rfi"
 alias emacs="emacs -nw"
-alias ee="emacs"
+alias ek="emacsclient -e '(kill-emacs)'"
 alias grepl="grep --exclude-dir={vendor,node_modules,storage,public} --exclude=\*.{lock,git,scss}"
 alias d="docker"
 alias dc="docker-compose"
@@ -43,8 +38,16 @@ cd_git_project() {
     fi
 }
 
+# run emacs in daemon mode inside terminal
+export ALTERNATE_EDITOR=""
+export EDITOR="ee"
+
 ev() {
-    emacs "$1" --eval '(setq buffer-read-only t)'
+    emacsclient -q -u -nw -e "(find-file-read-only \"$1\")" 2>/dev/null
+}
+
+ee() {
+    emacsclient -q -u $1 2>/dev/null
 }
 
 trash() {
