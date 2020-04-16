@@ -367,6 +367,14 @@
       (use-package typescript-mode)
     #+END_SRC
 
+** =emmet-mode= - auto-complete for html and css
+    #+BEGIN_SRC emacs-lisp
+      (use-package emmet-mode)
+
+      (add-hook 'css-mode-hook 'emmet-mode)
+      (add-hook 'html-mode-hook 'emmet-mode)
+    #+END_SRC
+
 * Custom functions
 ** tranpose lines
     #+BEGIN_SRC emacs-lisp
