@@ -1,4 +1,6 @@
 #+STARTUP: overview hidestars showall
+#+TITLE: Emacs setup
+#+AUTHOR: Q Do
 
 * Native
 ** interface tweaks
@@ -288,7 +290,7 @@
         )
     #+END_SRC
 
-**  =avy= - go to char
+** =avy= - go to char
     #+BEGIN_SRC emacs-lisp
       (use-package avy
         :bind ("M-s" . avy-goto-char))
