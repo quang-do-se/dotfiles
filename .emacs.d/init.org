@@ -297,8 +297,10 @@
 
       (use-package avy-zap
         :init
-        (global-set-key (kbd "M-z") 'avy-zap-to-char-dwim)
-        (global-set-key (kbd "M-Z") 'avy-zap-up-to-char-dwim))
+        (progn
+          (global-set-key (kbd "M-z") 'avy-zap-to-char-dwim)
+          (global-set-key (kbd "M-Z") 'avy-zap-up-to-char-dwim)
+          ))
     #+END_SRC
 
 ** =auto-complete=
@@ -375,6 +377,16 @@
 
       (add-hook 'css-mode-hook 'emmet-mode)
       (add-hook 'html-mode-hook 'emmet-mode)
+    #+END_SRC
+
+** projectile-mode
+    #+BEGIN_SRC emacs-lisp
+      (use-package projectile
+        :config (progn
+                  (projectile-mode +1)
+                  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+                  (setq projectile-completion-system 'ivy)
+                  ))
     #+END_SRC
 
 * Custom functions
