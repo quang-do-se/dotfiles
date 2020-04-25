@@ -437,9 +437,20 @@
           (error "Minibuffer is not active")))
     #+END_SRC
 
+** indent buffer
+    #+BEGIN_SRC emacs-lisp
+      (defun indent-buffer ()
+        (interactive)
+        (save-excursion
+          (indent-region (point-min) (point-max) nil)
+          (delete-trailing-whitespace)
+          ))
+    #+END_SRC
+
 ** key bindings
     #+BEGIN_SRC emacs-lisp
       (global-set-key [(meta p)] 'move-line-up)
       (global-set-key [(meta n)] 'move-line-down)
       (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
+      (global-set-key (kbd "C-M-\\") 'indent-buffer)
     #+END_SRC
