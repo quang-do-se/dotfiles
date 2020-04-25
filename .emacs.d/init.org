@@ -331,47 +331,57 @@
          (defun neotree-project-dir ()
            "Open NeoTree using the git root with projectile-mode."
            (interactive)
-           (let ((project-dir (projectile-project-root))
+           (let ((saved-current-buffer (current-buffer))
+                 (project-dir (projectile-project-root))
                  (file-name (buffer-file-name)))
              (if project-dir
                  (progn
                    (if (not (neo-global--window-exists-p))
-                       (neotree-toggle))
+                       (neotree-toggle)
+                     )
                    (neotree-dir project-dir)
                    (neotree-find file-name)
                    (neotree-refresh)
+                   (switch-to-buffer saved-current-buffer)
                    )
                (message "Could not find git project root."))))
 
          (defun neotree-open-or-refresh ()
            "Open NeoTree or refresh if already opened."
            (interactive)
-           (if (neo-global--window-exists-p)
-               (neotree-refresh)
-             (neotree-toggle))
-           )
-
-         (defun neotree-project-dir-refresh ()
-           "Open NeoTree or refresh if already opened."
-           (interactive)
-           (if (neo-global--window-exists-p)
-               (progn
-                 (let ((saved-current-buffer (current-buffer))
-                       (project-dir (projectile-project-root))
-                       (file-name (buffer-file-name)))
-                   (neotree-dir project-dir)
-                   (neotree-find file-name)
-                   (neotree-refresh)
-                   (switch-to-buffer saved-current-buffer)
-                   ))
+           (let ((saved-current-buffer (current-buffer)))
+             (if (neo-global--window-exists-p)
+                 (neotree-refresh)
+               (neotree-toggle))
+             (switch-to-buffer saved-current-buffer)
              ))
+
+
+         (defun neotree-3-modes ()
+           "
+           If neo's not open, show neo but stay in current buffer.
+           If neo's open and cursor's in neo, close neo.
+           If neo's open and cursor's not in neo, move to neo.
+           "
+           (interactive)
+           (let ((saved-current-buffer (current-buffer)))
+             (if (neo-global--window-exists-p)
+                 (if (eq (current-buffer) (neo-global--get-buffer))
+                     (neotree-hide)
+                   (progn
+                     (neotree-show)
+                     (neotree-refresh)
+                     ))
+               (progn
+                 (neotree-show)
+                 (neotree-refresh)
+                 (switch-to-buffer saved-current-buffer))
+               )))
+
 
          (global-set-key [f5] 'neotree-open-or-refresh)
          (global-set-key [f6] 'neotree-project-dir)
-         (global-set-key [f7] 'neotree-project-dir-refresh)
-         (global-set-key [f8] 'neotree-toggle)
-
-
+         (global-set-key [f7] 'neotree-3-modes)
          ))
    #+END_SRC
 
