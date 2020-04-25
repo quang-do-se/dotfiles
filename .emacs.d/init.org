@@ -4,7 +4,7 @@
 
 * Native
 ** interface tweaks
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       ;; prevent open tutorial window
       (setq inhibit-startup-message t)
 
@@ -45,10 +45,10 @@
 
       ;; Great 'line wrap' alternative for presentation
       ;; (global-visual-line-mode)
-    #+END_SRC
+   #+END_SRC
 
 ** org-mode
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (setq org-cycle-separator-lines 1)
 
       ;; 'line wrap' for org-mode
@@ -62,10 +62,10 @@
             (setq org-hide-emphasis-markers nil)
           (setq org-hide-emphasis-markers t))
         );
-    #+END_SRC
+   #+END_SRC
 
 ** window tweaks: default fullscreen, disable menubar & toolbar & scrollbar
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (menu-bar-mode -1)
       (tool-bar-mode -1)
       (scroll-bar-mode -1)
@@ -79,10 +79,10 @@
       ;; open new buffer vertically
       (setq split-width-threshold 0)
       (setq split-height-threshold nil)
-    #+END_SRC
+   #+END_SRC
 
 ** terminal emacs
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       ;; highlight in terminal mode
       (transient-mark-mode t)
 
@@ -93,17 +93,17 @@
       (add-to-list 'exec-path "/usr/local/smlnj/bin")
 
       ;; (add-to-list 'load-path "~/.emacs.d/non-official-scripts/")
-    #+END_SRC
+   #+END_SRC
 
 ** backup file
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (setq backup-by-copying t)
       (setq backup-directory-alist '((".*" . "~/.saves/")))
       (setq auto-save-file-name-transforms '((".*" "~/.saves/" t)))
-    #+END_SRC
+   #+END_SRC
 
 ** tab
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       ;; change tab to 2 spaces
       (setq-default c-basic-offset 2
                     js-indent-level 2
@@ -121,18 +121,18 @@
       (add-hook 'typescript-mode-hook
                 (lambda ()
                   (setq typescript-indent-level 2)))
-    #+END_SRC
+   #+END_SRC
 
 ** ediff
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (setq ediff-window-setup-function 'ediff-setup-windows-plain)
       (setq ediff-split-window-function 'split-window-horizontally)
       (setq ediff-make-buffers-readonly-at-startup t)
-    #+END_SRC
+   #+END_SRC
 
 * Packages
 ** =use-package=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (require 'package)
 
       (setq package-enable-at-startup nil)
@@ -154,32 +154,32 @@
       ;; always ensure packages
       (require 'use-package-ensure)
       (setq use-package-always-ensure t)
-    #+END_SRC
+   #+END_SRC
 
 ** =auto-compile=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package auto-compile
         :config (auto-compile-on-load-mode))
 
       (setq load-prefer-newer t)
-    #+END_SRC
+   #+END_SRC
 
 ** =try=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       ;; install 'try' to try new package without installing
       ;; use together with M-x describe-package
       (use-package try)
-    #+END_SRC
+   #+END_SRC
 
 ** =which-key= - key binding display helper
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package which-key
         :config
         (which-key-mode))
-    #+END_SRC
+   #+END_SRC
 
 ** programming modes - assign mode based on file extension
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package web-mode)
       (use-package php-mode)
       (use-package sml-mode)
@@ -189,26 +189,26 @@
       (add-to-list 'auto-mode-alist '("\\.sqr\\'" . sql-mode))
       (add-to-list 'auto-mode-alist '("\\.pc\\'" . c-mode))
       (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
-    #+END_SRC
+   #+END_SRC
 
 ** =org-bullet mode= - display bullets nicely
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package org-bullets
         :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-    #+END_SRC
+   #+END_SRC
 
 ** =yasnippet=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package yasnippet
         :config
         (setq yas/indent-line nil)
         (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
         (yas-global-mode 1)
         )
-    #+END_SRC
+   #+END_SRC
 
 ** =term-mode=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (defun term-switch-mode ()
         (interactive)
         (if (term-in-char-mode)
@@ -228,10 +228,10 @@
         (setq multi-term-program "/bin/bash")
         (global-set-key (kbd "C-c t") 'multi-term)
         )
-    #+END_SRC
+   #+END_SRC
 
 ** =ace-window= - jump between windows
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package ace-window
         :init
         (progn
@@ -242,15 +242,15 @@
           (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
           (setq aw-background nil)
           ))
-    #+END_SRC
+   #+END_SRC
 
 ** =counsel=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package counsel)
-    #+END_SRC
+   #+END_SRC
 
 ** =ivy=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package ivy
         :diminish (ivy-mode)
         :bind (("C-x b" . ivy-switch-buffer))
@@ -259,10 +259,10 @@
         (setq ivy-use-virtual-buffers t)
         (setq ivy-display-style 'fancy)
         )
-    #+END_SRC
+   #+END_SRC
 
 ** =swiper= - advanced search
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package swiper
         :bind (
                ("C-s" . swiper)
@@ -288,10 +288,10 @@
              ("d" counsel-find-file-mkdir-action "mkdir")))
           )
         )
-    #+END_SRC
+   #+END_SRC
 
 ** =avy= - go to char
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package avy
         :bind ("M-s" . avy-goto-char))
 
@@ -301,67 +301,68 @@
           (global-set-key (kbd "M-z") 'avy-zap-to-char-dwim)
           (global-set-key (kbd "M-Z") 'avy-zap-up-to-char-dwim)
           ))
-    #+END_SRC
+   #+END_SRC
 
 ** =auto-complete=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package auto-complete
         :init
         (progn
           (ac-config-default)
           (global-auto-complete-mode t)
           ))
-    #+END_SRC
+   #+END_SRC
 
 ** gruvbox-theme
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package gruvbox-theme
         :config (load-theme 'gruvbox t))
-    #+END_SRC
+   #+END_SRC
 
 ** neotree
-    #+BEGIN_SRC emacs-lisp
-      (use-package neotree
-        :config
+   #+BEGIN_SRC emacs-lisp
+     (use-package neotree
+       :config
+       (progn
+         (setq neo-autorefresh nil)
+         (setq neo-smart-open t)
+         (setq-default neo-show-hidden-files t)
+         (setq neo-theme 'ascii)
 
-        (defun neotree-project-dir ()
-          "Open NeoTree using the git root."
-          (interactive)
-          (let ((project-dir (projectile-project-root))
-                (file-name (buffer-file-name)))
-            (if project-dir
-                (save-excursion
-                  (progn
-                    (if (not (neo-global--window-exists-p))
-                        (neotree-toggle))
-                    (neotree-dir project-dir)
-                    (neotree-find file-name)
-                    (neotree-refresh)
-              
-                    ;; switch to previous buffer
-                    ;; (switch-to-buffer (other-buffer (current-buffer) 1))
-                    ))
-              (message "Could not find git project root."))))  
+         (defun neotree-project-dir ()
+           "Open NeoTree using the git root."
+           (interactive)
+           (let ((project-dir (projectile-project-root))
+                 (file-name (buffer-file-name)))
+             (if project-dir
+                 (save-excursion
+                   (progn
+                     (if (not (neo-global--window-exists-p))
+                         (neotree-toggle))
+                     (neotree-dir project-dir)
+                     (neotree-find file-name)
+                     (neotree-refresh)
 
-        (defun neotree-buffer ()
-          "Open NeoTree using the current buffer."
-          (interactive)
-          (let ((file-name (buffer-file-name)))
-            (if file-name
-                (progn (neotree-dir (file-name-directory file-name)))
-              (progn (neotree-dir default-directory)))))
+                     ;; switch to previous buffer
+                     ;; (switch-to-buffer (other-buffer (current-buffer) 1))
+                     ))
+               (message "Could not find git project root."))))
 
-        (setq neo-autorefresh nil)
-        (setq neo-smart-open t)
-        (setq-default neo-show-hidden-files t)
+         (defun neotree-buffer ()
+           "Open NeoTree using the current buffer."
+           (interactive)
+           (let ((file-name (buffer-file-name)))
+             (if file-name
+                 (progn (neotree-dir (file-name-directory file-name)))
+               (progn (neotree-dir default-directory)))))
 
-        (global-set-key [f5] 'neotree-toggle)
-        (global-set-key [f6] 'neotree-project-dir)
-        (global-set-key [f7] 'neotree-buffer)
 
-        (setq neo-theme 'ascii)
-        )
-    #+END_SRC
+         (global-set-key [f5] 'neotree-toggle)
+         (global-set-key [f6] 'neotree-project-dir)
+         (global-set-key [f7] 'neotree-buffer)
+    
+         ))
+   #+END_SRC
 
 ** =flycheck= - syntax checking
    #+BEGIN_SRC emacs-lisp
@@ -391,14 +392,15 @@
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
        :config
-       (projectile-mode +1)
-       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-       (setq projectile-completion-system 'ivy))
-    #+END_SRC
+       (progn
+         (projectile-mode +1)
+         (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+         (setq projectile-completion-system 'ivy)))
+   #+END_SRC
 
 * Custom functions
 ** tranpose lines
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (defun move-line-up ()
         "Move up the current line."
         (interactive)
@@ -417,10 +419,10 @@
           (forward-line -1)
           (move-to-column this-column)
           (indent-according-to-mode)))
-    #+END_SRC
+   #+END_SRC
 
 ** camel to underscore
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (defun camel-to-underscore ()
         (interactive)
         (progn
@@ -432,32 +434,32 @@
           (downcase-region
            (region-beginning)
            (region-end))))
-    #+END_SRC
+   #+END_SRC
 
 ** switch to minibuffer
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (defun switch-to-minibuffer ()
         "Switch to minibuffer window."
         (interactive)
         (if (active-minibuffer-window)
             (select-window (active-minibuffer-window))
           (error "Minibuffer is not active")))
-    #+END_SRC
+   #+END_SRC
 
 ** indent buffer
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (defun indent-buffer ()
         (interactive)
         (save-excursion
           (indent-region (point-min) (point-max) nil)
           (delete-trailing-whitespace)
           ))
-    #+END_SRC
+   #+END_SRC
 
 ** key bindings
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (global-set-key [(meta p)] 'move-line-up)
       (global-set-key [(meta n)] 'move-line-down)
       (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
       (global-set-key (kbd "C-M-\\") 'indent-buffer)
-    #+END_SRC
+   #+END_SRC
