@@ -330,37 +330,34 @@
          (setq neo-theme 'ascii)
 
          (defun neotree-project-dir ()
-           "Open NeoTree using the git root."
+           "Open NeoTree using the git root with projectile-mode."
            (interactive)
            (let ((project-dir (projectile-project-root))
                  (file-name (buffer-file-name)))
              (if project-dir
-                 (save-excursion
-                   (progn
-                     (if (not (neo-global--window-exists-p))
-                         (neotree-toggle))
-                     (neotree-dir project-dir)
-                     (neotree-find file-name)
-                     (neotree-refresh)
+                 (progn
+                   (if (not (neo-global--window-exists-p))
+                       (neotree-toggle))
+                   (neotree-dir project-dir)
+                   (neotree-find file-name)
+                   (neotree-refresh)
 
-                     ;; switch to previous buffer
-                     ;; (switch-to-buffer (other-buffer (current-buffer) 1))
-                     ))
+                   ;; switch to previous buffer
+                   ;; (switch-to-buffer (other-buffer (current-buffer) 1))
+                   )
                (message "Could not find git project root."))))
 
-         (defun neotree-buffer ()
-           "Open NeoTree using the current buffer."
+         (defun neotree-open-or-refresh ()
+           "Open NeoTree or refresh if already opened."
            (interactive)
-           (let ((file-name (buffer-file-name)))
-             (if file-name
-                 (progn (neotree-dir (file-name-directory file-name)))
-               (progn (neotree-dir default-directory)))))
+           (if (neo-global--window-exists-p)
+               (neotree-refresh)
+             (neotree-toggle))
+           )
 
-
-         (global-set-key [f5] 'neotree-toggle)
+         (global-set-key [f5] 'neotree-open-or-refresh)
          (global-set-key [f6] 'neotree-project-dir)
-         (global-set-key [f7] 'neotree-buffer)
-    
+
          ))
    #+END_SRC
 
