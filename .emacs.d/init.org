@@ -329,13 +329,19 @@
           (interactive)
           (let ((project-dir (projectile-project-root))
                 (file-name (buffer-file-name)))
-            (neotree-toggle)
             (if project-dir
-                (if (neo-global--window-exists-p)
-                    (progn
-                      (neotree-dir project-dir)
-                      (neotree-find file-name)))
-              (message "Could not find git project root."))))
+                (save-excursion
+                  (progn
+                    (if (not (neo-global--window-exists-p))
+                        (neotree-toggle))
+                    (neotree-dir project-dir)
+                    (neotree-find file-name)
+                    (neotree-refresh)
+              
+                    ;; switch to previous buffer
+                    ;; (switch-to-buffer (other-buffer (current-buffer) 1))
+                    ))
+              (message "Could not find git project root."))))  
 
         (defun neotree-buffer ()
           "Open NeoTree using the current buffer."
@@ -346,6 +352,8 @@
               (progn (neotree-dir default-directory)))))
 
         (setq neo-autorefresh nil)
+        (setq neo-smart-open t)
+        (setq-default neo-show-hidden-files t)
 
         (global-set-key [f5] 'neotree-toggle)
         (global-set-key [f6] 'neotree-project-dir)
@@ -356,37 +364,36 @@
     #+END_SRC
 
 ** =flycheck= - syntax checking
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package flycheck)
-    #+END_SRC
+   #+END_SRC
 
 ** =browse-kill-ring=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package browse-kill-ring
         :config (browse-kill-ring-default-keybindings))
-    #+END_SRC
+   #+END_SRC
 
 ** =typescript-mode=
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package typescript-mode)
-    #+END_SRC
+   #+END_SRC
 
 ** =emmet-mode= - auto-complete for html and css
-    #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package emmet-mode)
 
       (add-hook 'css-mode-hook 'emmet-mode)
       (add-hook 'html-mode-hook 'emmet-mode)
-    #+END_SRC
+   #+END_SRC
 
 ** projectile-mode
-    #+BEGIN_SRC emacs-lisp
-      (use-package projectile
-        :config (progn
-                  (projectile-mode +1)
-                  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-                  (setq projectile-completion-system 'ivy)
-                  ))
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+       :config
+       (projectile-mode +1)
+       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+       (setq projectile-completion-system 'ivy))
     #+END_SRC
 
 * Custom functions
