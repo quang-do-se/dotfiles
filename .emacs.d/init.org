@@ -305,12 +305,13 @@
 
 ** =auto-complete=
    #+BEGIN_SRC emacs-lisp
-      (use-package auto-complete
-        :init
-        (progn
-          (ac-config-default)
-          (global-auto-complete-mode t)
-          ))
+     (use-package auto-complete
+       :init
+       (progn
+         (ac-config-default)
+         (global-auto-complete-mode t)
+         (add-to-list 'ac-modes 'typescript-mode)
+         ))
    #+END_SRC
 
 ** gruvbox-theme
