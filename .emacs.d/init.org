@@ -309,6 +309,7 @@
        :init
        (progn
          (ac-config-default)
+         (setq ac-ignore-case nil)
          (global-auto-complete-mode t)
          (add-to-list 'ac-modes 'typescript-mode)
          ))
