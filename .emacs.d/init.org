@@ -45,10 +45,6 @@
 
      ;; Great 'line wrap' alternative for presentation
      ;; (global-visual-line-mode)
-
-     ;; Pair (parenthesis, braces, brackets) completion
-     (electric-pair-mode 1)
-     (setq electric-pair-preserve-balance nil)
    #+END_SRC
 
 ** org-mode
@@ -116,15 +112,6 @@
       (setq-default indent-tabs-mode nil)
 
       (global-set-key (kbd "TAB") 'tab-to-tab-stop)
-
-      (add-hook 'python-mode-hook
-                (lambda ()
-                  (setq tab-width 2)
-                  (setq python-indent-offset 2)))
-
-      (add-hook 'typescript-mode-hook
-                (lambda ()
-                  (setq typescript-indent-level 2)))
    #+END_SRC
 
 ** ediff
@@ -182,23 +169,55 @@
         (which-key-mode))
    #+END_SRC
 
-** programming modes - assign mode based on file extension
+** programming modes
    #+BEGIN_SRC emacs-lisp
-      (use-package web-mode)
-      (use-package php-mode)
-      (use-package sml-mode)
+     (use-package web-mode)
+     (use-package php-mode)
+     (use-package sml-mode)
+     (use-package typescript-mode)
 
-      ;; assign mode based on file extension
-      (add-to-list 'auto-mode-alist '("\\.shl\\'" . shell-script-mode))
-      (add-to-list 'auto-mode-alist '("\\.sqr\\'" . sql-mode))
-      (add-to-list 'auto-mode-alist '("\\.pc\\'" . c-mode))
-      (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
+     (add-hook 'css-mode-hook
+               (lambda ()
+                 (emmet-mode)
+                 (smartparens-mode)))
+
+     (add-hook 'html-mode-hook
+               (lambda ()
+                 (emmet-mode)
+                 (smartparens-mode)))
+
+     (add-hook 'python-mode-hook
+               (lambda ()
+                 (setq tab-width 2)
+                 (setq python-indent-offset 2)
+                 (smartparens-mode)))
+
+     (add-hook 'typescript-mode-hook
+               (lambda ()
+                 (setq typescript-indent-level 2)
+                 (smartparens-mode)))
+
+     (add-hook 'js-mode-hook
+               (lambda()
+                 (smartparens-mode)))
+
+     (add-hook 'org-mode-hook
+               (lambda ()
+                 (org-bullets-mode 1)
+                 (smartparens-mode)))
    #+END_SRC
 
+** Assign mode based on file extension
+   #+BEGIN_SRC emacs-lisp
+     ;; assign mode based on file extension
+     (add-to-list 'auto-mode-alist '("\\.shl\\'" . shell-script-mode))
+     (add-to-list 'auto-mode-alist '("\\.sqr\\'" . sql-mode))
+     (add-to-list 'auto-mode-alist '("\\.pc\\'" . c-mode))
+     (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
+   #+END_SRC
 ** =org-bullet mode= - display bullets nicely
    #+BEGIN_SRC emacs-lisp
-      (use-package org-bullets
-        :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+     (use-package org-bullets)
    #+END_SRC
 
 ** =yasnippet=
@@ -402,17 +421,9 @@
         :config (browse-kill-ring-default-keybindings))
    #+END_SRC
 
-** =typescript-mode=
-   #+BEGIN_SRC emacs-lisp
-      (use-package typescript-mode)
-   #+END_SRC
-
 ** =emmet-mode= - auto-complete for html and css
    #+BEGIN_SRC emacs-lisp
       (use-package emmet-mode)
-
-      (add-hook 'css-mode-hook 'emmet-mode)
-      (add-hook 'html-mode-hook 'emmet-mode)
    #+END_SRC
 
 ** projectile-mode
@@ -423,6 +434,12 @@
          (projectile-mode +1)
          (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
          (setq projectile-completion-system 'ivy)))
+   #+END_SRC
+
+** smartparens mode
+   #+BEGIN_SRC emacs-lisp
+     (use-package smartparens
+       :config (require 'smartparens-config))
    #+END_SRC
 
 * Custom functions
