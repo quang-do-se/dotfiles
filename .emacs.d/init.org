@@ -5,46 +5,50 @@
 * Native
 ** interface tweaks
    #+BEGIN_SRC emacs-lisp
-      ;; prevent open tutorial window
-      (setq inhibit-startup-message t)
+     ;; prevent open tutorial window
+     (setq inhibit-startup-message t)
 
-      ;; prevent EOL conversion
-      (setq inhibit-eol-conversion nil)
+     ;; prevent EOL conversion
+     (setq inhibit-eol-conversion nil)
 
-      ;; shorten confirm answers
-      (fset 'yes-or-no-p 'y-or-n-p)
+     ;; shorten confirm answers
+     (fset 'yes-or-no-p 'y-or-n-p)
 
-      ;; shortcut for refresh buffer
-      (global-set-key (kbd "<f5>") 'revert-buffer)
+     ;; shortcut for refresh buffer
+     (global-set-key (kbd "<f5>") 'revert-buffer)
 
-      ;; auto revert buffer
-      (global-auto-revert-mode t)
+     ;; auto revert buffer
+     (global-auto-revert-mode t)
 
-      (show-paren-mode 1)
-      (column-number-mode 1)
-      (global-subword-mode 1)
+     (show-paren-mode 1)
+     (column-number-mode 1)
+     (global-subword-mode 1)
 
-      ;; replace when highlighting/marking
-      (delete-selection-mode 1)
+     ;; replace when highlighting/marking
+     (delete-selection-mode 1)
 
-      (set-face-attribute 'default nil :height 280)
+     (set-face-attribute 'default nil :height 280)
 
-      ;; map C-x C-b to ibuffer
-      (defalias 'list-buffers 'ibuffer-other-window)
+     ;; map C-x C-b to ibuffer
+     (defalias 'list-buffers 'ibuffer-other-window)
 
-      ;; don't ask when killing unmodified buffer
-      (setq ibuffer-expert t)
+     ;; don't ask when killing unmodified buffer
+     (setq ibuffer-expert t)
 
-      (setq kill-ring-max 333)
+     (setq kill-ring-max 333)
 
-      ;; always use unix line ending
-      (setq default-buffer-file-coding-system 'utf-8-unix)
+     ;; always use unix line ending
+     (setq default-buffer-file-coding-system 'utf-8-unix)
 
-      ;; always show line ending which is not unix
-      (setq inhibit-eol-conversion t)
+     ;; always show line ending which is not unix
+     (setq inhibit-eol-conversion t)
 
-      ;; Great 'line wrap' alternative for presentation
-      ;; (global-visual-line-mode)
+     ;; Great 'line wrap' alternative for presentation
+     ;; (global-visual-line-mode)
+
+     ;; Pair (parenthesis, braces, brackets) completion
+     (electric-pair-mode 1)
+     (setq electric-pair-preserve-balance nil)
    #+END_SRC
 
 ** org-mode
