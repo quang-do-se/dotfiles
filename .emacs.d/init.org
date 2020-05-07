@@ -97,9 +97,16 @@
 
 ** backup file
    #+BEGIN_SRC emacs-lisp
-      (setq backup-by-copying t)
-      (setq backup-directory-alist '((".*" . "~/.saves/")))
-      (setq auto-save-file-name-transforms '((".*" "~/.saves/" t)))
+     ;; Handle .*~ backup files
+     (setq backup-by-copying t)
+     (setq backup-directory-alist '((".*" . "~/.saves/")))
+
+     ;; Handle #*# auto-save files
+     (setq auto-save-file-name-transforms '((".*" "~/.saves/" t)))
+     (setq auto-save-list-file-prefix "~/.saves/")
+
+     ;; Handle .# lock file
+     (setq create-lockfiles nil)
    #+END_SRC
 
 ** tab
