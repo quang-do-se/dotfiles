@@ -22,7 +22,10 @@ alias g="git"
 source /etc/bash_completion.d/git 2>/dev/null
 source /usr/share/bash-completion/completions/git 2>/dev/null
 
-__git_complete g __git_main 2>/dev/null # mac
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] \
+    && . "/usr/local/etc/profile.d/bash_completion.sh" \
+    && __git_complete g __git_main 2>/dev/null # mac
+
 complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null # linux
 
 #-------------------------------------------------
@@ -33,7 +36,7 @@ docker-container-stop-all() {
 
 cd_git_project() {
     pdir=$(git rev-parse --show-toplevel 2>/dev/null)
-    
+
     if [ ! -z "${pdir}" ]
     then
         cd "${pdir}"
@@ -152,7 +155,7 @@ get_git_prompt() {
             current_branch=${current_branch}' ↓'${behind}
         fi
     fi
-    
+
     git_status_count=$(git status -s 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
 
     git_stash_count=$(git stash list 2>/dev/null | wc -l | sed -e 's/[[:space:]]*//g')
