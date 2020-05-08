@@ -114,9 +114,9 @@ prompt_color_escape() {
 set=$(prompt_color_escape '00')
 RESET=$(prompt_color_escape '')
 
-# 01; bold version of that color
-# 38;5; foreground color
-# 48;5; background color
+# 01; bold text version of that color
+# 38;5;[000-255] foreground color
+# 48;5;[000-255] background color
 BG_RED=$(prompt_color_escape '48;5;196')
 
 FG_CYAN=$(prompt_color_escape '01;38;5;075')
