@@ -27,6 +27,10 @@
 
   au = add -u
 
+  aucm = !git add -u && git commit -m
+
+  aacm = !git add . && git commit -m
+
   blt = branch --sort=committerdate
 
   c = commit
