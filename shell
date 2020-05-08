@@ -117,7 +117,7 @@ RESET=$(prompt_color_escape '')
 # 01; bold version of that color
 # 38;5; foreground color
 # 48;5; background color
-BG_RED=$(prompt_color_escape '48;5;009')
+BG_RED=$(prompt_color_escape '48;5;196')
 
 FG_CYAN=$(prompt_color_escape '01;38;5;075')
 FG_BRIGHT_GREEN=$(prompt_color_escape '01;38;5;118')
