@@ -449,6 +449,20 @@
        :config (require 'smartparens-config))
    #+END_SRC
 
+** markdown-mode
+   #+BEGIN_SRC emacs-lisp
+     (use-package markdown-mode
+       ; Github-flavored markdown
+       :commands gfm-mode
+
+       :mode (("\\.md$" . gfm-mode))
+
+       ;;; don't change face in code block
+       (custom-set-faces
+        '(markdown-code-face ((t nil))))
+       )
+   #+END_SRC
+
 * Custom functions
 ** tranpose lines
    #+BEGIN_SRC emacs-lisp
@@ -509,8 +523,12 @@
 
 ** key bindings
    #+BEGIN_SRC emacs-lisp
-      (global-set-key [(meta p)] 'move-line-up)
-      (global-set-key [(meta n)] 'move-line-down)
-      (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
-      (global-set-key (kbd "C-M-\\") 'indent-buffer)
+     (global-set-key [(meta p)] 'move-line-up)
+     (global-set-key [(meta n)] 'move-line-down)
+     (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
+     (global-set-key (kbd "C-M-\\") 'indent-buffer)
+
+     ; alternate between 1 space, no space and orginal spacing
+     (global-set-key (kbd "M-SPC") 'cycle-spacing)
+
    #+END_SRC
