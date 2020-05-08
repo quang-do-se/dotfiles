@@ -452,11 +452,12 @@
 ** markdown-mode
    #+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
-       ; Github-flavored markdown
+       ;;; Github-flavored markdown
        :commands gfm-mode
 
        :mode (("\\.md$" . gfm-mode))
 
+       :config
        ;;; don't change face in code block
        (custom-set-faces
         '(markdown-code-face ((t nil))))
@@ -528,7 +529,6 @@
      (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
      (global-set-key (kbd "C-M-\\") 'indent-buffer)
 
-     ; alternate between 1 space, no space and orginal spacing
+     ;;; alternate between 1 space, no space and orginal spacing
      (global-set-key (kbd "M-SPC") 'cycle-spacing)
-
    #+END_SRC
