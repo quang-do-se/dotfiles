@@ -423,6 +423,16 @@
      (use-package groovy-mode)
    #+END_SRC
 
+** dockerfile-mode
+   #+BEGIN_SRC emacs-lisp
+     (use-package dockerfile-mode)
+   #+END_SRC
+
+** yaml-mode
+   #+BEGIN_SRC emacs-lisp
+     (use-package yaml-mode)
+   #+END_SRC
+
 ** programming modes
    #+BEGIN_SRC emacs-lisp
      (use-package web-mode)
@@ -472,6 +482,8 @@
      (add-to-list 'auto-mode-alist '("\\.sqr\\'" . sql-mode))
      (add-to-list 'auto-mode-alist '("\\.pc\\'" . c-mode))
      (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+     (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
    #+END_SRC
 
 * Custom functions
