@@ -17,6 +17,9 @@ if ! grep -q "$source_path" ~/.profile; then
     printf "\n%s" "$source_path" >> ~/.profile
 fi
 
+cp ./.gitconfig ~/.gitconfig
+cp ./.gitexcludes ~/.gitexcludes
+
 sudo sh <<EOF
 if [ -f /root/.bashrc ] && ! grep -q "$source_path" /root/.bashrc ; then
   printf "\n%s" "$source_path" >> /root/.bashrc
@@ -27,6 +30,3 @@ if [ -d /root ] ; then
   cp ./.gitexcludes /root/.gitexcludes
 fi
 EOF
-
-cp ./.gitconfig ~/.gitconfig
-cp ./.gitexcludes ~/.gitexcludes
