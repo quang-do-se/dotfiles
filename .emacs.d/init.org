@@ -176,52 +176,6 @@
         (which-key-mode))
    #+END_SRC
 
-** programming modes
-   #+BEGIN_SRC emacs-lisp
-     (use-package web-mode)
-     (use-package php-mode)
-     (use-package sml-mode)
-     (use-package typescript-mode)
-
-     (add-hook 'css-mode-hook
-               (lambda ()
-                 (emmet-mode)
-                 (smartparens-mode)))
-
-     (add-hook 'html-mode-hook
-               (lambda ()
-                 (emmet-mode)
-                 (smartparens-mode)))
-
-     (add-hook 'python-mode-hook
-               (lambda ()
-                 (setq tab-width 2)
-                 (setq python-indent-offset 2)
-                 (smartparens-mode)))
-
-     (add-hook 'typescript-mode-hook
-               (lambda ()
-                 (setq typescript-indent-level 2)
-                 (smartparens-mode)))
-
-     (add-hook 'js-mode-hook
-               (lambda()
-                 (smartparens-mode)))
-
-     (add-hook 'org-mode-hook
-               (lambda ()
-                 (org-bullets-mode 1)
-                 (smartparens-mode)))
-   #+END_SRC
-
-** Assign mode based on file extension
-   #+BEGIN_SRC emacs-lisp
-     ;; assign mode based on file extension
-     (add-to-list 'auto-mode-alist '("\\.shl\\'" . shell-script-mode))
-     (add-to-list 'auto-mode-alist '("\\.sqr\\'" . sql-mode))
-     (add-to-list 'auto-mode-alist '("\\.pc\\'" . c-mode))
-     (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
-   #+END_SRC
 ** =org-bullet mode= - display bullets nicely
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets)
@@ -462,6 +416,62 @@
        (custom-set-faces
         '(markdown-code-face ((t nil))))
        )
+   #+END_SRC
+
+** groovy-mode
+   #+BEGIN_SRC emacs-lisp
+     (use-package groovy-mode)
+   #+END_SRC
+
+** programming modes
+   #+BEGIN_SRC emacs-lisp
+     (use-package web-mode)
+     (use-package php-mode)
+     (use-package sml-mode)
+     (use-package typescript-mode)
+
+     (add-hook 'css-mode-hook
+               (lambda ()
+                 (emmet-mode)
+                 (smartparens-mode)))
+
+     (add-hook 'html-mode-hook
+               (lambda ()
+                 (emmet-mode)
+                 (smartparens-mode)))
+
+     (add-hook 'python-mode-hook
+               (lambda ()
+                 (setq tab-width 2)
+                 (setq python-indent-offset 2)
+                 (smartparens-mode)))
+
+     (add-hook 'typescript-mode-hook
+               (lambda ()
+                 (setq typescript-indent-level 2)
+                 (smartparens-mode)))
+
+     (add-hook 'js-mode-hook
+               (lambda()
+                 (smartparens-mode)))
+
+     (add-hook 'org-mode-hook
+               (lambda ()
+                 (org-bullets-mode 1)
+                 (smartparens-mode)))
+
+     (add-hook 'groovy-mode-hook
+               (lambda ()
+                 (smartparens-mode)))
+   #+END_SRC
+
+** Assign mode based on file extension
+   #+BEGIN_SRC emacs-lisp
+     ;; assign mode based on file extension
+     (add-to-list 'auto-mode-alist '("\\.shl\\'" . shell-script-mode))
+     (add-to-list 'auto-mode-alist '("\\.sqr\\'" . sql-mode))
+     (add-to-list 'auto-mode-alist '("\\.pc\\'" . c-mode))
+     (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
    #+END_SRC
 
 * Custom functions
