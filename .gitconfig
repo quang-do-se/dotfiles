@@ -85,3 +85,24 @@
 
 [init]
   templatedir = ~/.git-template
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+
+[color "branch"]
+  current = yellow reverse bold
+  local = yellow bold
+  remote = green bold
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = yellow bold
+  changed = green bold
+  untracked = cyan bold

@@ -24,7 +24,9 @@ fi
 
 if [ -d /root ] ; then
   cp ./.gitconfig /root/.gitconfig
+  cp ./.gitexcludes /root/.gitexcludes
 fi
 EOF
 
 cp ./.gitconfig ~/.gitconfig
+cp ./.gitexcludes ~/.gitexcludes
