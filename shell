@@ -111,7 +111,7 @@ ssh-add -K ~/.ssh/id_rsa &>/dev/null
 
 prompt_color_escape() {
     # Make sure using escape \] for PS1
-    echo '\[\e['$@'m\]'
+    printf '\[\e['$@'m\]'
 
     # echo '\[\033['$@'m\]'
 }
@@ -190,7 +190,7 @@ get_git_prompt() {
     fi
 
     # squeeze spaces into single space | then remove all trailing spaces
-    echo " (${current_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
+    printf " (${current_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
 }
 
 get_vpn_prompt() {
@@ -198,7 +198,7 @@ get_vpn_prompt() {
 
     if [ $? -eq 0 ]
     then
-        echo ' (VPN)'
+        printf ' (VPN)'
     fi
 }
 

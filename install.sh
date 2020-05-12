@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -d "~/.emacs.d/snippets" ]
+if [ ! -d "~/.emacs.d/snippets" ];
 then
     mkdir -p ~/.emacs.d/snippets
 fi
