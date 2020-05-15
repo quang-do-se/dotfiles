@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # ALIAS
 alias rm="rm -i"
@@ -57,7 +57,7 @@ emacsclient-read-only() {
 }
 
 emacsclient-edit() {
-    emacsclient -q -u $1 2>/dev/null
+    emacsclient -q -u "$1" 2>/dev/null
 }
 
 trash() {
@@ -221,3 +221,44 @@ function cd_up() {
 }
 
 alias 'cd..'='cd_up'
+
+#-------------------------------------------------
+
+# ubuntu
+alias paste="xclip -selection clipboard -o"
+
+copy() {
+    if ! type xclip > /dev/null 2>&1; # Check that xclip is installed.
+    then
+        printf "You must have the 'xclip' program installed.\n"
+    elif [ "$USER" == "root" ]; # Check user is not root (root doesn't have access to user xorg server)
+    then
+        printf "Must be regular user (not root) to copy a file to the clipboard.\n"
+    else
+        if  [ -t 0 ]; # Check if FD 0 (standard input) is hooked up to a TTY. False if running in a pipeline
+        then # Fetch input from params
+            input="$*"
+        else # Fetch input from stdin since pipe sends it there
+            input="$(< /dev/stdin)"
+        fi
+
+        if [ -z "$input" ]; 
+        then # If no input, print usage message.
+            printf "Copies a string to the clipboard.\n"
+            printf "Usage: cb <string>\n"
+            printf "       printf <string> | cb\n"
+        else
+            # Copy input to clipboard
+            printf "$input" | xclip -selection c
+
+            # Truncate text for status
+            if [ ${#input} -gt 80 ];
+            then
+                input="$(printf $input | cut -c1-80)...\n";
+            fi
+
+            # Print status.
+            printf "Copied to clipboard: $input\n"
+        fi
+    fi
+}
