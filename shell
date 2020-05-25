@@ -245,8 +245,8 @@ copy() {
         if [ -z "$input" ]; 
         then # If no input, print usage message.
             printf "Copies a string to the clipboard.\n"
-            printf "Usage: cb <string>\n"
-            printf "       printf <string> | cb\n"
+            printf "Usage: copy <string>\n"
+            printf "       printf <string> | copy\n"
         else
             # Copy input to clipboard
             printf "$input" | xclip -selection c
