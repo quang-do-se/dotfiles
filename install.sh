@@ -1,11 +1,13 @@
 #!/usr/bin/env sh
 
+BASEDIR=$(dirname "$0")
+
 if [ ! -d "~/.emacs.d/snippets" ];
 then
     mkdir -p ~/.emacs.d/snippets
 fi
 
-cp ./.emacs ~/.emacs && cp ./.emacs.d/init.org ~/.emacs.d/init.org
+cp "$BASEDIR/.emacs" ~/.emacs && cp "$BASEDIR/.emacs.d/init.org" ~/.emacs.d/init.org
 
 source_path="source $(pwd)/shell"
 
@@ -17,8 +19,8 @@ if ! grep -q "$source_path" ~/.profile; then
     printf "\n%s" "$source_path" >> ~/.profile
 fi
 
-cp ./.gitconfig ~/.gitconfig
-cp ./.gitexcludes ~/.gitexcludes
+cp "$BASEDIR/.gitconfig" ~/.gitconfig
+cp "$BASEDIR/.gitexcludes" ~/.gitexcludes
 
 sudo sh <<EOF
 if [ -f /root/.bashrc ] && ! grep -q "$source_path" /root/.bashrc ; then
@@ -26,7 +28,7 @@ if [ -f /root/.bashrc ] && ! grep -q "$source_path" /root/.bashrc ; then
 fi
 
 if [ -d /root ] ; then
-  cp ./.gitconfig /root/.gitconfig
-  cp ./.gitexcludes /root/.gitexcludes
+  cp "$BASEDIR/.gitconfig" /root/.gitconfig
+  cp "$BASEDIR/.gitexcludes" /root/.gitexcludes
 fi
 EOF
