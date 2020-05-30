@@ -1,10 +1,10 @@
-#+STARTUP: overview hidestars showall
+#+STARTUP: indent hidestars showall
 #+TITLE: Emacs setup
 #+AUTHOR: Q Do
 
 * Native
 ** interface tweaks
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      ;; prevent open tutorial window
      (setq inhibit-startup-message t)
 
@@ -45,10 +45,10 @@
 
      ;; Great 'line wrap' alternative for presentation
      ;; (global-visual-line-mode)
-   #+END_SRC
+#+END_SRC
 
 ** org-mode
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (setq org-cycle-separator-lines 1)
 
       ;; 'line wrap' for org-mode
@@ -62,10 +62,10 @@
             (setq org-hide-emphasis-markers nil)
           (setq org-hide-emphasis-markers t))
         );
-   #+END_SRC
+#+END_SRC
 
 ** window tweaks: default fullscreen, disable menubar & toolbar & scrollbar
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (menu-bar-mode -1)
       (tool-bar-mode -1)
       (scroll-bar-mode -1)
@@ -79,10 +79,10 @@
       ;; open new buffer vertically
       (setq split-width-threshold 0)
       (setq split-height-threshold nil)
-   #+END_SRC
+#+END_SRC
 
 ** terminal emacs
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       ;; highlight in terminal mode
       (transient-mark-mode t)
 
@@ -93,10 +93,10 @@
       (add-to-list 'exec-path "/usr/local/smlnj/bin")
 
       ;; (add-to-list 'load-path "~/.emacs.d/non-official-scripts/")
-   #+END_SRC
+#+END_SRC
 
 ** backup file
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      ;; Handle .*~ backup files
      (setq backup-by-copying t)
      (setq backup-directory-alist '((".*" . "~/.saves/")))
@@ -107,10 +107,10 @@
 
      ;; Handle .# lock file
      (setq create-lockfiles nil)
-   #+END_SRC
+#+END_SRC
 
 ** tab
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       ;; change tab to 2 spaces
       (setq-default c-basic-offset 2
                     js-indent-level 2
@@ -119,18 +119,18 @@
       (setq-default indent-tabs-mode nil)
 
       (global-set-key (kbd "TAB") 'tab-to-tab-stop)
-   #+END_SRC
+#+END_SRC
 
 ** ediff
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (setq ediff-window-setup-function 'ediff-setup-windows-plain)
       (setq ediff-split-window-function 'split-window-horizontally)
       (setq ediff-make-buffers-readonly-at-startup t)
-   #+END_SRC
+#+END_SRC
 
 * Packages
 ** =use-package=
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (require 'package)
 
       (setq package-enable-at-startup nil)
@@ -152,47 +152,47 @@
       ;; always ensure packages
       (require 'use-package-ensure)
       (setq use-package-always-ensure t)
-   #+END_SRC
+#+END_SRC
 
 ** =auto-compile=
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package auto-compile
         :config (auto-compile-on-load-mode))
 
       (setq load-prefer-newer t)
-   #+END_SRC
+#+END_SRC
 
 ** =try=
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       ;; install 'try' to try new package without installing
       ;; use together with M-x describe-package
       (use-package try)
-   #+END_SRC
+#+END_SRC
 
 ** =which-key= - key binding display helper
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package which-key
         :config
         (which-key-mode))
-   #+END_SRC
+#+END_SRC
 
 ** =org-bullet mode= - display bullets nicely
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package org-bullets)
-   #+END_SRC
+#+END_SRC
 
 ** =yasnippet=
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package yasnippet
         :config
         (setq yas/indent-line nil)
         (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
         (yas-global-mode 1)
         )
-   #+END_SRC
+#+END_SRC
 
 ** =term-mode=
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (defun term-switch-mode ()
         (interactive)
         (if (term-in-char-mode)
@@ -212,10 +212,10 @@
         (setq multi-term-program "/bin/bash")
         (global-set-key (kbd "C-c t") 'multi-term)
         )
-   #+END_SRC
+#+END_SRC
 
 ** =ace-window= - jump between windows
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package ace-window
         :init
         (progn
@@ -226,15 +226,15 @@
           (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
           (setq aw-background nil)
           ))
-   #+END_SRC
+#+END_SRC
 
 ** =counsel=
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package counsel)
-   #+END_SRC
+#+END_SRC
 
 ** =ivy=
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package ivy
         :diminish (ivy-mode)
         :bind (("C-x b" . ivy-switch-buffer))
@@ -243,10 +243,10 @@
         (setq ivy-use-virtual-buffers t)
         (setq ivy-display-style 'fancy)
         )
-   #+END_SRC
+#+END_SRC
 
 ** =swiper= - advanced search
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package swiper
        :bind (
               ("C-s" . swiper)
@@ -273,10 +273,10 @@
             ("d" counsel-find-file-mkdir-action "mkdir")))
          )
        )
-   #+END_SRC
+#+END_SRC
 
 ** =avy= - go to char
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package avy
         :bind ("M-s" . avy-goto-char))
 
@@ -286,10 +286,10 @@
           (global-set-key (kbd "M-z") 'avy-zap-to-char-dwim)
           (global-set-key (kbd "M-Z") 'avy-zap-up-to-char-dwim)
           ))
-   #+END_SRC
+#+END_SRC
 
 ** =auto-complete=
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package auto-complete
        :init
        (progn
@@ -298,16 +298,16 @@
          (global-auto-complete-mode t)
          (add-to-list 'ac-modes 'typescript-mode)
          ))
-   #+END_SRC
+#+END_SRC
 
 ** gruvbox-theme
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package gruvbox-theme
         :config (load-theme 'gruvbox t))
-   #+END_SRC
+#+END_SRC
 
 ** neotree
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package neotree
        :config
        (progn
@@ -370,42 +370,42 @@
          (global-set-key [f6] 'neotree-project-dir)
          (global-set-key [f7] 'neotree-3-modes)
          ))
-   #+END_SRC
+#+END_SRC
 
 ** =flycheck= - syntax checking
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package flycheck)
-   #+END_SRC
+#+END_SRC
 
 ** =browse-kill-ring=
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package browse-kill-ring
         :config (browse-kill-ring-default-keybindings))
-   #+END_SRC
+#+END_SRC
 
 ** =emmet-mode= - auto-complete for html and css
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package emmet-mode)
-   #+END_SRC
+#+END_SRC
 
 ** projectile-mode
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package projectile
        :config
        (progn
          (projectile-mode +1)
          (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
          (setq projectile-completion-system 'ivy)))
-   #+END_SRC
+#+END_SRC
 
 ** smartparens mode
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package smartparens
        :config (require 'smartparens-config))
-   #+END_SRC
+#+END_SRC
 
 ** markdown-mode
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
        ;;; Github-flavored markdown
        :commands gfm-mode
@@ -417,25 +417,25 @@
        (custom-set-faces
         '(markdown-code-face ((t nil))))
        )
-   #+END_SRC
+#+END_SRC
 
 ** groovy-mode
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package groovy-mode)
-   #+END_SRC
+#+END_SRC
 
 ** dockerfile-mode
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package dockerfile-mode)
-   #+END_SRC
+#+END_SRC
 
 ** yaml-mode
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package yaml-mode)
-   #+END_SRC
+#+END_SRC
 
 ** programming modes
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package web-mode)
      (use-package php-mode)
      (use-package sml-mode)
@@ -474,10 +474,10 @@
      (add-hook 'groovy-mode-hook
                (lambda ()
                  (smartparens-mode)))
-   #+END_SRC
+#+END_SRC
 
 ** Assign mode based on file extension
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      ;; assign mode based on file extension
      (add-to-list 'auto-mode-alist '("\\.shl\\'" . shell-script-mode))
      (add-to-list 'auto-mode-alist '("\\.sqr\\'" . sql-mode))
@@ -485,11 +485,11 @@
      (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
      (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
-   #+END_SRC
+#+END_SRC
 
 * Custom functions
 ** tranpose lines
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (defun move-line-up ()
         "Move up the current line."
         (interactive)
@@ -508,10 +508,10 @@
           (forward-line -1)
           (move-to-column this-column)
           (indent-according-to-mode)))
-   #+END_SRC
+#+END_SRC
 
 ** camel to underscore
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (defun camel-to-underscore ()
         (interactive)
         (progn
@@ -523,30 +523,30 @@
           (downcase-region
            (region-beginning)
            (region-end))))
-   #+END_SRC
+#+END_SRC
 
 ** switch to minibuffer
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (defun switch-to-minibuffer ()
         "Switch to minibuffer window."
         (interactive)
         (if (active-minibuffer-window)
             (select-window (active-minibuffer-window))
           (error "Minibuffer is not active")))
-   #+END_SRC
+#+END_SRC
 
 ** indent buffer
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (defun indent-buffer ()
         (interactive)
         (save-excursion
           (indent-region (point-min) (point-max) nil)
           (delete-trailing-whitespace)
           ))
-   #+END_SRC
+#+END_SRC
 
 ** key bindings
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (global-set-key [(meta p)] 'move-line-up)
      (global-set-key [(meta n)] 'move-line-down)
      (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
@@ -554,4 +554,4 @@
 
      ;;; alternate between 1 space, no space and orginal spacing
      (global-set-key (kbd "M-SPC") 'cycle-spacing)
-   #+END_SRC
+#+END_SRC
