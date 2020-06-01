@@ -474,6 +474,10 @@
      (add-hook 'groovy-mode-hook
                (lambda ()
                  (smartparens-mode)))
+
+     (add-hook 'java-mode-hook
+               (lambda ()
+                 (smartparens-mode)))
 #+END_SRC
 
 ** Assign mode based on file extension

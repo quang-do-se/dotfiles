@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-BASEDIR=$(dirname "$0")
+BASEDIR=$(cd -- "$(dirname -- "$0")" && pwd - P)
 
 if [ ! -d "~/.emacs.d/snippets" ];
 then
@@ -9,7 +9,7 @@ fi
 
 cp "$BASEDIR/.emacs" ~/.emacs && cp "$BASEDIR/.emacs.d/init.org" ~/.emacs.d/init.org
 
-source_path="source $(pwd)/shell"
+source_path="source $BASEDIR/shell"
 
 if ! grep -q "$source_path" ~/.bashrc; then
     printf "\n%s" "$source_path" >> ~/.bashrc
