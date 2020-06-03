@@ -551,11 +551,15 @@
 
 ** key bindings
 #+BEGIN_SRC emacs-lisp
-     (global-set-key [(meta p)] 'move-line-up)
-     (global-set-key [(meta n)] 'move-line-down)
-     (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
-     (global-set-key (kbd "C-M-\\") 'indent-buffer)
+  (global-set-key [(meta down)] 'move-line-down)
+  (global-set-key [(meta up)] 'move-line-up)
 
-     ;;; alternate between 1 space, no space and orginal spacing
-     (global-set-key (kbd "M-SPC") 'cycle-spacing)
+  (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
+  (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+
+  (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
+  (global-set-key (kbd "C-M-\\") 'indent-buffer)
+
+       ;;; alternate between 1 space, no space and orginal spacing
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
 #+END_SRC
