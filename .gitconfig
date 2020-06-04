@@ -5,8 +5,11 @@
 [push]
   default = simple
 
+[advice]
+  waitingForEditor = false # don't display hint message when opening editor
+
 [core]
-  editor = emacs -nw
+  editor = emacsclient -q -u -nw 2>/dev/null
   # `git show` invokes pager and uses editor that accepts stdin
   pager = less
   ignorecase = true
@@ -30,6 +33,10 @@
   aucm = !git add -u && git commit -m
 
   aacm = !git add . && git commit -m
+
+  auc = !git add -u && git commit
+
+  aac = !git add . && git commit
 
   blt = branch --sort=committerdate
 

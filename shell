@@ -57,7 +57,7 @@ emacsclient-read-only() {
 }
 
 emacsclient-edit() {
-    emacsclient -q -u "$1" 2>/dev/null
+    emacsclient -q -u -nw "$1" 2>/dev/null
 }
 
 trash() {
