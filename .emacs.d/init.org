@@ -49,6 +49,7 @@
 
 ** org-mode
    #+BEGIN_SRC emacs-lisp
+     ;; don't allow blank line to collap
      (setq org-cycle-separator-lines 1)
 
      ;; 'line wrap' for org-mode
