@@ -87,10 +87,11 @@
      (transient-mark-mode t)
 
      ;; UI app has different PATH from shell
-     (setenv "PATH" (concat "/usr/local/smlnj/bin:/usr/local/bin:" (getenv "PATH")))
+     (setenv "PATH" (concat "/Library/TeX/texbin:/usr/local/smlnj/bin:/usr/local/bin:" (getenv "PATH")))
 
      (add-to-list 'exec-path "/usr/local/bin")
      (add-to-list 'exec-path "/usr/local/smlnj/bin")
+     (add-to-list 'exec-path "/Library/TeX/texbin")
 
      ;; (add-to-list 'load-path "~/.emacs.d/non-official-scripts/")
    #+END_SRC
@@ -478,6 +479,11 @@
      (add-hook 'java-mode-hook
                (lambda ()
                  (smartparens-mode)))
+   #+END_SRC
+
+** htmlize
+   #+BEGIN_SRC emacs-lisp
+     (use-package htmlize)
    #+END_SRC
 
 ** Assign mode based on file extension
