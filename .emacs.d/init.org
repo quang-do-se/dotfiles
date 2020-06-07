@@ -305,7 +305,7 @@
 ** gruvbox-theme
    #+BEGIN_SRC emacs-lisp
      (use-package gruvbox-theme
-       :config (load-theme 'gruvbox t))
+       :config (load-theme 'gruvbox-dark-hard t))
    #+END_SRC
 
 ** neotree
