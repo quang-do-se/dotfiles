@@ -2,194 +2,6 @@
 #+TITLE: Emacs setup
 #+AUTHOR: Q Do
 
-* Native
-** interface tweaks
-   #+BEGIN_SRC emacs-lisp
-     ;; prevent open tutorial window
-     (setq inhibit-startup-message t)
-
-     ;; prevent EOL conversion
-     (setq inhibit-eol-conversion nil)
-
-     ;; shorten confirm answers
-     (fset 'yes-or-no-p 'y-or-n-p)
-
-     ;; shortcut for refresh buffer
-     (global-set-key (kbd "<f5>") 'revert-buffer)
-
-     ;; auto revert buffer
-     (global-auto-revert-mode t)
-
-     (show-paren-mode 1)
-     (column-number-mode 1)
-     (global-subword-mode 1)
-
-     ;; replace when highlighting/marking
-     (delete-selection-mode 1)
-
-     (set-face-attribute 'default nil :height 280)
-
-     ;; map C-x C-b to ibuffer
-     (defalias 'list-buffers 'ibuffer-other-window)
-
-     ;; don't ask when killing unmodified buffer
-     (setq ibuffer-expert t)
-
-     (setq kill-ring-max 333)
-
-     ;; always use unix line ending
-     (setq default-buffer-file-coding-system 'utf-8-unix)
-
-     ;; always show line ending which is not unix
-     (setq inhibit-eol-conversion t)
-
-     ;; Great 'line wrap' alternative for presentation
-     ;; (global-visual-line-mode)
-   #+END_SRC
-
-** Mode line format
-
-   #+BEGIN_SRC emacs-lisp
-     (set-face-attribute 'mode-line nil
-                         :background "#353644"
-                         :foreground "white"
-                         :box '(:line-width 8 :color "#353644")
-                         :overline nil
-                         :underline nil)
-
-     (set-face-attribute 'mode-line-inactive nil
-                         :background "#565063"
-                         :foreground "white"
-                         :box '(:line-width 8 :color "#565063")
-                         :overline nil
-                         :underline nil)
-
-     (setq-default mode-line-format
-                   (list
-                    ;; day and time
-                    '(:eval (propertize (format-time-string " %b %d %H:%M ")
-                                        'face 'font-lock-builtin-face))
-
-
-                    '(:eval (propertize (substring vc-mode 5)
-                                        'face 'font-lock-comment-face))
-
-                    ;; the buffer name; the file name as a tool tip
-                    '(:eval (propertize " %b "
-                                        'face
-                                        (let ((face (buffer-modified-p)))
-                                          (if face 'font-lock-warning-face
-                                            'font-lock-type-face))
-                                        'help-echo (buffer-file-name)))
-
-                    ;; line and column
-                    " (" ;; '%02' to set to 2 chars at least; prevents flickering
-                    (propertize "%02l" 'face 'font-lock-keyword-face) ","
-                    (propertize "%02c" 'face 'font-lock-keyword-face)
-                    ") "
-
-                    ;; relative position, size of file
-                    " ["
-                    (propertize "%p" 'face 'font-lock-constant-face) ;; % above top
-                    "/"
-                    (propertize "%I" 'face 'font-lock-constant-face) ;; size
-                    "] "
-
-                    (propertize " %Z%*%+ " 'face 'font-lock-constant-face)
-
-                    ;; spaces to align right
-                    '(:eval (propertize
-                             " " 'display
-                             `((space :align-to (- (+ right right-fringe right-margin)
-                                                   ,(+ 3 (string-width mode-name)))))))
-
-                    (propertize " %m " 'face 'font-lock-string-face)
-                    ))
-   #+END_SRC
-
-** org-mode
-   #+BEGIN_SRC emacs-lisp
-     ;; don't allow blank line to collapse
-     (setq org-cycle-separator-lines 1)
-
-     ;; 'line wrap' for org-mode
-     (setq org-startup-truncated nil)
-
-     (setq org-hide-emphasis-markers nil)
-
-     (defun org-marker-toggle ()
-       (interactive)
-       (if org-hide-emphasis-markers
-           (setq org-hide-emphasis-markers nil)
-         (setq org-hide-emphasis-markers t))
-       );
-   #+END_SRC
-
-** window tweaks: default fullscreen, disable menubar & toolbar & scrollbar
-   #+BEGIN_SRC emacs-lisp
-     (menu-bar-mode -1)
-     (tool-bar-mode -1)
-     (scroll-bar-mode -1)
-
-     ;; fullscreen mode - does not work with Mac
-     ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-     ;; work both in Mac and Ubuntu
-     (toggle-frame-fullscreen)
-
-     ;; open new buffer vertically
-     (setq split-width-threshold 0)
-     (setq split-height-threshold nil)
-   #+END_SRC
-
-** terminal emacs
-   #+BEGIN_SRC emacs-lisp
-     ;; highlight in terminal mode
-     (transient-mark-mode t)
-
-     ;; UI app has different PATH from shell
-     (setenv "PATH" (concat "/Library/TeX/texbin:/usr/local/smlnj/bin:/usr/local/bin:" (getenv "PATH")))
-
-     (add-to-list 'exec-path "/usr/local/bin")
-     (add-to-list 'exec-path "/usr/local/smlnj/bin")
-     (add-to-list 'exec-path "/Library/TeX/texbin")
-
-     ;; (add-to-list 'load-path "~/.emacs.d/non-official-scripts/")
-   #+END_SRC
-
-** backup file
-   #+BEGIN_SRC emacs-lisp
-     ;; Handle .*~ backup files
-     (setq backup-by-copying t)
-     (setq backup-directory-alist '((".*" . "~/.saves/")))
-
-     ;; Handle #*# auto-save files
-     (setq auto-save-file-name-transforms '((".*" "~/.saves/" t)))
-     (setq auto-save-list-file-prefix "~/.saves/")
-
-     ;; Handle .# lock file
-     (setq create-lockfiles nil)
-   #+END_SRC
-
-** tab
-   #+BEGIN_SRC emacs-lisp
-     ;; change tab to 2 spaces
-     (setq-default c-basic-offset 2
-                   js-indent-level 2
-                   tab-width 2)
-
-     (setq-default indent-tabs-mode nil)
-
-     (global-set-key (kbd "TAB") 'tab-to-tab-stop)
-   #+END_SRC
-
-** ediff
-   #+BEGIN_SRC emacs-lisp
-     (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-     (setq ediff-split-window-function 'split-window-horizontally)
-     (setq ediff-make-buffers-readonly-at-startup t)
-   #+END_SRC
-
 * Packages
 ** =use-package=
    #+BEGIN_SRC emacs-lisp
@@ -556,6 +368,134 @@
                (org-ac/config-default)))
    #+END_SRC
 
+* Native
+** interface tweaks
+   #+BEGIN_SRC emacs-lisp
+     ;; prevent open tutorial window
+     (setq inhibit-startup-message t)
+
+     ;; prevent EOL conversion
+     (setq inhibit-eol-conversion nil)
+
+     ;; shorten confirm answers
+     (fset 'yes-or-no-p 'y-or-n-p)
+
+     ;; shortcut for refresh buffer
+     (global-set-key (kbd "<f5>") 'revert-buffer)
+
+     ;; auto revert buffer
+     (global-auto-revert-mode t)
+
+     (show-paren-mode 1)
+     (column-number-mode 1)
+     (global-subword-mode 1)
+
+     ;; replace when highlighting/marking
+     (delete-selection-mode 1)
+
+     (set-face-attribute 'default nil :height 280)
+
+     ;; map C-x C-b to ibuffer
+     (defalias 'list-buffers 'ibuffer-other-window)
+
+     ;; don't ask when killing unmodified buffer
+     (setq ibuffer-expert t)
+
+     (setq kill-ring-max 333)
+
+     ;; always use unix line ending
+     (setq default-buffer-file-coding-system 'utf-8-unix)
+
+     ;; always show line ending which is not unix
+     (setq inhibit-eol-conversion t)
+
+     ;; Great 'line wrap' alternative for presentation
+     ;; (global-visual-line-mode)
+   #+END_SRC
+
+** org-mode
+   #+BEGIN_SRC emacs-lisp
+     ;; don't allow blank line to collapse
+     (setq org-cycle-separator-lines 1)
+
+     ;; 'line wrap' for org-mode
+     (setq org-startup-truncated nil)
+
+     (setq org-hide-emphasis-markers nil)
+
+     (defun org-marker-toggle ()
+       (interactive)
+       (if org-hide-emphasis-markers
+           (setq org-hide-emphasis-markers nil)
+         (setq org-hide-emphasis-markers t))
+       );
+   #+END_SRC
+
+** window tweaks: default fullscreen, disable menubar & toolbar & scrollbar
+   #+BEGIN_SRC emacs-lisp
+     (menu-bar-mode -1)
+     (tool-bar-mode -1)
+     (scroll-bar-mode -1)
+
+     ;; fullscreen mode - does not work with Mac
+     ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+     ;; work both in Mac and Ubuntu
+     (toggle-frame-fullscreen)
+
+     ;; open new buffer vertically
+     (setq split-width-threshold 0)
+     (setq split-height-threshold nil)
+   #+END_SRC
+
+** terminal emacs
+   #+BEGIN_SRC emacs-lisp
+     ;; highlight in terminal mode
+     (transient-mark-mode t)
+
+     ;; UI app has different PATH from shell
+     (setenv "PATH" (concat "/Library/TeX/texbin:/usr/local/smlnj/bin:/usr/local/bin:" (getenv "PATH")))
+
+     (add-to-list 'exec-path "/usr/local/bin")
+     (add-to-list 'exec-path "/usr/local/smlnj/bin")
+     (add-to-list 'exec-path "/Library/TeX/texbin")
+
+     ;; (add-to-list 'load-path "~/.emacs.d/non-official-scripts/")
+   #+END_SRC
+
+** backup file
+   #+BEGIN_SRC emacs-lisp
+     ;; Handle .*~ backup files
+     (setq backup-by-copying t)
+     (setq backup-directory-alist '((".*" . "~/.saves/")))
+
+     ;; Handle #*# auto-save files
+     (setq auto-save-file-name-transforms '((".*" "~/.saves/" t)))
+     (setq auto-save-list-file-prefix "~/.saves/")
+
+     ;; Handle .# lock file
+     (setq create-lockfiles nil)
+   #+END_SRC
+
+** tab
+   #+BEGIN_SRC emacs-lisp
+     ;; change tab to 2 spaces
+     (setq-default c-basic-offset 2
+                   js-indent-level 2
+                   tab-width 2)
+
+     (setq-default indent-tabs-mode nil)
+
+     (global-set-key (kbd "TAB") 'tab-to-tab-stop)
+   #+END_SRC
+
+** ediff
+   #+BEGIN_SRC emacs-lisp
+     (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+     (setq ediff-split-window-function 'split-window-horizontally)
+     (setq ediff-make-buffers-readonly-at-startup t)
+   #+END_SRC
+
 * Custom functions
 ** Assign mode based on file extension
    #+BEGIN_SRC emacs-lisp
@@ -646,4 +586,63 @@
      (global-set-key (kbd "C-c a") 'org-agenda)
      (global-set-key (kbd "C-c b") 'org-iswitchb)
      (global-set-key (kbd "C-c c") 'org-capture)
+   #+END_SRC
+
+** Mode line format
+   #+BEGIN_SRC emacs-lisp
+     (set-face-attribute 'mode-line nil
+                         :background "#353644"
+                         :foreground "white"
+                         :box '(:line-width 8 :color "#353644")
+                         :overline nil
+                         :underline nil)
+
+     (set-face-attribute 'mode-line-inactive nil
+                         :background "#565063"
+                         :foreground "white"
+                         :box '(:line-width 8 :color "#565063")
+                         :overline nil
+                         :underline nil)
+
+     (setq-default mode-line-format
+                   (list
+                    ;; day and time
+                    '(:eval (propertize (format-time-string " %b %d %H:%M ")
+                                        'face 'font-lock-builtin-face))
+
+
+                    '(:eval (if vc-mode (propertize (substring vc-mode 5)
+                                                    'face 'font-lock-comment-face)))
+
+                    ;; the buffer name; the file name as a tool tip
+                    '(:eval (propertize " %b "
+                                        'face
+                                        (let ((face (buffer-modified-p)))
+                                          (if face 'font-lock-warning-face
+                                            'font-lock-type-face))
+                                        'help-echo (buffer-file-name)))
+
+                    ;; line and column
+                    " (" ;; '%02' to set to 2 chars at least; prevents flickering
+                    (propertize "%01l" 'face 'font-lock-keyword-face) ","
+                    (propertize "%01c" 'face 'font-lock-keyword-face)
+                    ") "
+
+                    ;; relative position, size of file
+                    " ["
+                    (propertize "%p" 'face 'font-lock-constant-face) ;; % above top
+                    "/"
+                    (propertize "%I" 'face 'font-lock-constant-face) ;; size
+                    "] "
+
+                    (propertize " %Z%*%+ " 'face 'font-lock-constant-face)
+
+                    ;; spaces to align right
+                    '(:eval (propertize
+                             " " 'display
+                             `((space :align-to (- (+ right right-fringe right-margin)
+                                                   ,(+ 3 (string-width mode-name)))))))
+
+                    (propertize " %m " 'face 'font-lock-string-face)
+                    ))
    #+END_SRC
