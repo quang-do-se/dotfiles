@@ -1,4 +1,4 @@
-#+STARTUP: hidestars showall
+#+STARTUP: hidestars content
 #+TITLE: Emacs setup
 #+AUTHOR: Q Do
 
@@ -393,7 +393,8 @@
      ;; replace when highlighting/marking
      (delete-selection-mode 1)
 
-     (set-face-attribute 'default nil :height 280)
+     (set-face-attribute 'default nil :height 240)
+     (set-face-attribute 'mode-line nil  :height 200)
 
      ;; map C-x C-b to ibuffer
      (defalias 'list-buffers 'ibuffer-other-window)
