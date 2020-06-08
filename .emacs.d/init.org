@@ -630,7 +630,7 @@
                                         'face
                                         (let ((face (buffer-modified-p)))
                                           (if face 'font-lock-warning-face
-                                            '(:foreground "white")))
+                                            '(:foreground "light green")))
                                         'help-echo (buffer-file-name)))
 
                     ;; line and column
