@@ -496,6 +496,19 @@
      (setq ediff-make-buffers-readonly-at-startup t)
    #+END_SRC
 
+** tramp
+   #+BEGIN_SRC emacs-lisp
+     ;; speed up tramp
+     (setq remote-file-name-inhibit-cache nil)
+
+     (setq vc-ignore-dir-regexp
+           (format "%s\\|%s"
+                         vc-ignore-dir-regexp
+                         tramp-file-name-regexp))
+
+     (setq tramp-verbose 0)
+   #+END_SRC
+
 * Custom functions
 ** Assign mode based on file extension
    #+BEGIN_SRC emacs-lisp
