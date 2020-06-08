@@ -487,6 +487,16 @@
      (use-package htmlize)
    #+END_SRC
 
+** org-ac
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-ac
+       :ensure t
+       :init (progn
+               (require 'org-ac)
+               (org-ac/config-default)))
+   #+END_SRC
+
+* Custom functions
 ** Assign mode based on file extension
    #+BEGIN_SRC emacs-lisp
      ;; assign mode based on file extension
@@ -496,9 +506,10 @@
      (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
      (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+     (add-to-list 'auto-mode-alist
+                  '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
    #+END_SRC
 
-* Custom functions
 ** tranpose lines
    #+BEGIN_SRC emacs-lisp
      (defun move-line-up ()
@@ -567,6 +578,12 @@
      (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
      (global-set-key (kbd "C-M-\\") 'indent-buffer)
 
-          ;;; alternate between 1 space, no space and orginal spacing
+     ;;; alternate between 1 space, no space and orginal spacing
      (global-set-key (kbd "M-SPC") 'cycle-spacing)
+
+     ;;; org-mode
+     (global-set-key (kbd "C-c l") 'org-store-link)
+     (global-set-key (kbd "C-c a") 'org-agenda)
+     (global-set-key (kbd "C-c b") 'org-iswitchb)
+     (global-set-key (kbd "C-c c") 'org-capture)
    #+END_SRC
