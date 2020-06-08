@@ -281,13 +281,13 @@
 ** markdown-mode
    #+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
-       ;;; Github-flavored markdown
+       ;; Github-flavored markdown
        :commands gfm-mode
 
        :mode (("\\.md$" . gfm-mode))
 
        :config
-       ;;; don't change face in code block
+       ;; don't change face in code block
        (custom-set-faces
         '(markdown-code-face ((t nil))))
        )
@@ -578,10 +578,10 @@
      (global-set-key (kbd "C-c o") 'switch-to-minibuffer)
      (global-set-key (kbd "C-M-\\") 'indent-buffer)
 
-     ;;; alternate between 1 space, no space and orginal spacing
+     ;; alternate between 1 space, no space and orginal spacing
      (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
-     ;;; org-mode
+     ;; org-mode
      (global-set-key (kbd "C-c l") 'org-store-link)
      (global-set-key (kbd "C-c a") 'org-agenda)
      (global-set-key (kbd "C-c b") 'org-iswitchb)
@@ -610,9 +610,13 @@
                     '(:eval (propertize (format-time-string " %b %d %H:%M ")
                                         'face 'font-lock-builtin-face))
 
-
+                    ;;Check if there is a version control and display the current branch name
                     '(:eval (if vc-mode (propertize (concat " " (substring vc-mode 5) " ")
-                                                    'face 'font-lock-comment-face)))
+                                                    'face '(:foreground "white"))))
+
+                    ;; Check if there is a Git project and display the project name
+                    '(:eval (if (and (projectile-project-p) (fboundp 'projectile-project-name))
+                                (propertize (concat " " (projectile-project-name) " ") 'face '(:foreground "light green"))))
 
                     ;; the buffer name; the file name as a tool tip
                     '(:eval (propertize " %b "
