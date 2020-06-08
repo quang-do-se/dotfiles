@@ -611,7 +611,7 @@
                                         'face 'font-lock-builtin-face))
 
 
-                    '(:eval (if vc-mode (propertize (substring vc-mode 5)
+                    '(:eval (if vc-mode (propertize (concat " " (substring vc-mode 5) " ")
                                                     'face 'font-lock-comment-face)))
 
                     ;; the buffer name; the file name as a tool tip
