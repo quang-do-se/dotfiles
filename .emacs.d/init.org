@@ -646,7 +646,7 @@
                     '(:eval (propertize
                              " " 'display
                              `((space :align-to (- (+ right right-fringe right-margin)
-                                                   ,(+ 3 (string-width mode-name)))))))
+                                                   ,(+ 2 (string-width mode-name)))))))
 
                     (propertize " %m " 'face 'font-lock-string-face)
                     ))
