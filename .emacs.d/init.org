@@ -394,7 +394,6 @@
      (delete-selection-mode 1)
 
      (set-face-attribute 'default nil :height 240)
-     (set-face-attribute 'mode-line nil  :height 200)
 
      ;; map C-x C-b to ibuffer
      (defalias 'list-buffers 'ibuffer-other-window)
@@ -594,6 +593,7 @@
      (set-face-attribute 'mode-line nil
                          :background "#353644"
                          :foreground "white"
+                         :height 200
                          :box '(:line-width 8 :color "#353644")
                          :overline nil
                          :underline nil)
@@ -601,6 +601,7 @@
      (set-face-attribute 'mode-line-inactive nil
                          :background "#565063"
                          :foreground "white"
+                         :height 200
                          :box '(:line-width 8 :color "#565063")
                          :overline nil
                          :underline nil)
