@@ -429,6 +429,12 @@
            (setq org-hide-emphasis-markers nil)
          (setq org-hide-emphasis-markers t))
        );
+
+     (setq org-capture-templates
+           '(
+             ("q" "q" entry (file "~/Desktop/q.org")
+              "* %?\n%i\n")
+             ))
    #+END_SRC
 
 ** window tweaks: default fullscreen, disable menubar & toolbar & scrollbar
