@@ -342,8 +342,7 @@
 
      (add-hook 'org-mode-hook
                (lambda ()
-                 (org-bullets-mode 1)
-                 (smartparens-mode)))
+                 (org-bullets-mode 1)))
 
      (add-hook 'groovy-mode-hook
                (lambda ()
@@ -421,7 +420,7 @@
      ;; 'line wrap' for org-mode
      (setq org-startup-truncated nil)
 
-     (setq org-hide-emphasis-markers nil)
+     (setq org-hide-emphasis-markers t)
 
      (defun org-marker-toggle ()
        (interactive)
