@@ -15,6 +15,10 @@
   ignorecase = true
   autocrlf = input
 
+[pull]
+  rebase = false # merge (the default strategy)
+  ff = only
+
 [alias]
   graph = log --pretty=oneline --abbrev-commit --graph --decorate --color --all
 
