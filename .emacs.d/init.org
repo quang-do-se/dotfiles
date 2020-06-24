@@ -379,9 +379,6 @@
      ;; shorten confirm answers
      (fset 'yes-or-no-p 'y-or-n-p)
 
-     ;; shortcut for refresh buffer
-     (global-set-key (kbd "<f5>") 'revert-buffer)
-
      ;; auto revert buffer
      (global-auto-revert-mode t)
 
@@ -604,9 +601,12 @@
      (global-set-key (kbd "C-c a") 'org-agenda)
      (global-set-key (kbd "C-c b") 'org-iswitchb)
      (global-set-key (kbd "C-c c") 'org-capture)
+
+     ;; shortcut for refresh buffer
+     (global-set-key (kbd "C-c g") 'revert-buffer)
    #+END_SRC
 
-** Mode line format
+** mode line format
    #+BEGIN_SRC emacs-lisp
      (set-face-attribute 'mode-line nil
                          :background "#353644"
