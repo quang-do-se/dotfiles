@@ -428,6 +428,8 @@
 
      (setq org-capture-templates
            '(
+             ("l" "Link" entry (file+headline "~/Desktop/links.org" "Links")
+              "* %? %^L %^g \n%T" :prepend t)
              ("q" "q" entry (file "~/Desktop/q.org")
               "* %?\n%i\n")
              ))
