@@ -434,6 +434,8 @@
               "* %?\n%i\n")
              ))
 
+     ;; set tag indent to 0
+     ;; C-u C-c C-q to apply tag change
      (setq org-tags-column 0)
    #+END_SRC
 
