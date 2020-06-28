@@ -409,7 +409,7 @@
      ;; (global-visual-line-mode)
    #+END_SRC
 
-** COMMENT org-mode
+** org-mode
    #+BEGIN_SRC emacs-lisp
      ;; don't allow blank line to collapse
      (setq org-cycle-separator-lines 1)
@@ -429,10 +429,12 @@
      (setq org-capture-templates
            '(
              ("l" "Link" entry (file+headline "~/Desktop/links.org" "Links")
-              "* %^g %^L%?\n%T")
+              "* %^L %^g%?\n%T")
              ("q" "q" entry (file "~/Desktop/q.org")
               "* %?\n%i\n")
              ))
+
+     (setq org-tags-column 0)
    #+END_SRC
 
 ** window tweaks: default fullscreen, disable menubar & toolbar & scrollbar
