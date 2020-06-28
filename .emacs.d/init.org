@@ -409,7 +409,7 @@
      ;; (global-visual-line-mode)
    #+END_SRC
 
-** org-mode
+** COMMENT org-mode
    #+BEGIN_SRC emacs-lisp
      ;; don't allow blank line to collapse
      (setq org-cycle-separator-lines 1)
@@ -429,7 +429,7 @@
      (setq org-capture-templates
            '(
              ("l" "Link" entry (file+headline "~/Desktop/links.org" "Links")
-              "* %? %^L %^g \n%T" :prepend t)
+              "* %^g %^L%?\n%T")
              ("q" "q" entry (file "~/Desktop/q.org")
               "* %?\n%i\n")
              ))
@@ -514,6 +514,7 @@
    #+END_SRC
 
 * Custom functions
+
 ** Assign mode based on file extension
    #+BEGIN_SRC emacs-lisp
      ;; assign mode based on file extension
@@ -526,7 +527,6 @@
      (add-to-list 'auto-mode-alist
                   '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
    #+END_SRC
-
 ** tranpose lines
    #+BEGIN_SRC emacs-lisp
      (defun move-line-up ()
