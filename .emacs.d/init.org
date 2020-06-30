@@ -171,6 +171,7 @@
          (setq ac-ignore-case nil)
          (global-auto-complete-mode t)
          (add-to-list 'ac-modes 'typescript-mode)
+         (add-to-list 'ac-modes 'org-mode)
          ))
    #+END_SRC
 
@@ -360,11 +361,11 @@
 
 ** org-ac
    #+BEGIN_SRC emacs-lisp
-     (use-package org-ac
-       :ensure t
-       :init (progn
-               (require 'org-ac)
-               (org-ac/config-default)))
+     ;; (use-package org-ac
+     ;;   :ensure t
+     ;;   :init (progn
+     ;;           (require 'org-ac)
+     ;;           (org-ac/config-default)))
    #+END_SRC
 
 * Native
