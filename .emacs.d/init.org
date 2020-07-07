@@ -431,7 +431,7 @@
            '(
              ("l" "Link" entry (file+headline "~/Desktop/links.org" "Links")
               "* %^L %^g%?\n%T")
-             ("q" "q" entry (file "~/Desktop/q.org")
+             ("t" "t" entry (file "~/Desktop/q.org")
               "* %?\n%i\n")
              ))
 
