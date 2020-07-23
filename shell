@@ -35,7 +35,7 @@ shopt -s globstar 2>/dev/null
 shopt -s extglob
 
 #-------------------------------------------------
-# FUNCTION
+# FUNCTIONS
 docker-container-stop-all() {
     docker container stop $(docker container ls -qa)
 }
@@ -77,6 +77,22 @@ gitgraph() {
     done
     git log --graph --decorate --pretty=oneline --abbrev-commit ${args}
 }
+
+qcc() {
+    while [ "$1" != "" ]; do
+        file_name=$(basename -s .cpp "$1")
+
+        if [ ! -e "$file_name".cpp ]; then
+            printf "'%s' is not a .cpp file.\n" "$1"
+        else
+            printf 'Compiling %s...\n' "$1"
+            g++ -std=c++14 -Wshadow -Wall -g -D_GLIBCXX_DEBUG -o "$file_name" "$file_name".cpp
+        fi
+
+        shift
+    done
+}
+
 
 #-------------------------------------------------
 # ETERNAL BASH HISTORY
@@ -141,23 +157,23 @@ get_git_prompt() {
     # if there is no branch, don't display anything
     # quote the variable in case of string with multiple words
     # -z if the string length is zero
-    if [ -z "${current_branch}" ]
+    if [ -z "${current_branch}" ];
     then
         return 0
     fi
 
     remote_tracking_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null);
 
-    if [ ! -z "${remote_tracking_branch}" ]
+    if [ ! -z "${remote_tracking_branch}" ];
     then
         read ahead behind <<< $(git rev-list --left-right --count ${current_branch}...${remote_tracking_branch} 2>/dev/null)
 
-        if [ ${ahead} -gt 0 ]
+        if [ ${ahead} -gt 0 ];
         then
             current_branch=${current_branch}' ↑'${ahead}
         fi
 
-        if [ ${behind} -gt 0 ]
+        if [ ${behind} -gt 0 ];
         then
             current_branch=${current_branch}' ↓'${behind}
         fi
@@ -169,21 +185,21 @@ get_git_prompt() {
 
     git_conflict_count=$(git diff --name-only --diff-filter=U 2>/dev/null | wc -l | tr -d ' ')
 
-    if [ ${git_status_count} -eq 0 ]
+    if [ ${git_status_count} -eq 0 ];
     then
         git_status_count=${FG_BRIGHT_GREEN}'✔' # ✔✓
     else
         git_status_count='▲'${git_status_count}
     fi
 
-    if [ ${git_stash_count} -eq 0 ]
+    if [ ${git_stash_count} -eq 0 ];
     then
         git_stash_count=''
     else
         git_stash_count='⚑'${git_stash_count}
     fi
 
-    if [ ${git_conflict_count} -eq 0 ]
+    if [ ${git_conflict_count} -eq 0 ];
     then
         git_conflict_count=''
     else
@@ -197,7 +213,7 @@ get_git_prompt() {
 get_vpn_prompt() {
     is_vpn=$(pgrep -x openconnect)
 
-    if [ $? -eq 0 ]
+    if [ $? -eq 0 ];
     then
         printf ' (VPN)'
     fi
@@ -243,7 +259,7 @@ copy() {
             input="$(< /dev/stdin)"
         fi
 
-        if [ -z "$input" ]; 
+        if [ -z "$input" ];
         then # If no input, print usage message.
             printf "Copies a string to the clipboard.\n"
             printf "Usage: copy <string>\n"
