@@ -116,6 +116,7 @@
        (ivy-mode 1)
        (setq ivy-use-virtual-buffers t)
        (setq ivy-display-style 'fancy)
+       (setq ivy-initial-inputs-alist nil)
        )
    #+END_SRC
 
