@@ -20,7 +20,9 @@
   ff = only
 
 [alias]
-  graph = log --pretty=oneline --abbrev-commit --graph --decorate --color --all
+  graph = log --pretty=oneline --abbrev-commit --graph --decorate --color
+
+  slog = log --pretty=oneline --abbrev-commit
 
   pulla = !git pull && git submodule update --init --recursive
 
