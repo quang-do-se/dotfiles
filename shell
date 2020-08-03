@@ -266,12 +266,12 @@ copy() {
             printf "       printf <string> | copy\n"
         else
             # Copy input to clipboard
-            printf "$input" | xclip -selection c
+            printf -- "$input" | xclip -selection c
 
             # Truncate text for status
             if [ ${#input} -gt 80 ];
             then
-                input="$(printf $input | cut -c1-80)...\n";
+                input="$(printf -- "$input" | cut -c1-80 | head -n 5)...\n";
             fi
 
             # Print status.
