@@ -375,9 +375,6 @@
      ;; prevent open tutorial window
      (setq inhibit-startup-message t)
 
-     ;; prevent EOL conversion
-     (setq inhibit-eol-conversion nil)
-
      ;; shorten confirm answers
      (fset 'yes-or-no-p 'y-or-n-p)
 
