@@ -10,11 +10,10 @@
 
 [core]
   editor = emacsclient -q -u -nw 2>/dev/null
-  # `git show` invokes pager and uses editor that accepts stdin
-  pager = less
+  pager = less  # `git show` invokes pager and uses editor that accepts stdin
   ignorecase = true
-  autocrlf = false
-  eol = lf
+  autocrlf = false  # don't convert line ending
+  eol = lf # always use Unix line ending
 
 [pull]
   rebase = false # merge (the default strategy)
