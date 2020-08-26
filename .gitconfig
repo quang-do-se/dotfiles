@@ -13,7 +13,8 @@
   # `git show` invokes pager and uses editor that accepts stdin
   pager = less
   ignorecase = true
-  autocrlf = input
+  autocrlf = false
+  eol = lf
 
 [pull]
   rebase = false # merge (the default strategy)
