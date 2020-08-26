@@ -357,7 +357,7 @@
 
 ** htmlize
    #+BEGIN_SRC emacs-lisp
-     (use-package htmlize)
+     (use-package htmlize :ensure t)
    #+END_SRC
 
 ** org-ac
@@ -367,6 +367,11 @@
      ;;   :init (progn
      ;;           (require 'org-ac)
      ;;           (org-ac/config-default)))
+   #+END_SRC
+
+** ag
+   #+BEGIN_SRC emacs-lisp
+     (use-package ag :ensure t)
    #+END_SRC
 
 * Native
@@ -527,8 +532,8 @@
      (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
      (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
-     (add-to-list 'auto-mode-alist
-                  '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
+     (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
+     (add-to-list 'auto-mode-alist '("\\.inc\\'" . php-mode))
    #+END_SRC
 ** tranpose lines
    #+BEGIN_SRC emacs-lisp
