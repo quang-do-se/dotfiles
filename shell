@@ -120,8 +120,8 @@ fi
 #-------------------------------------------------
 # SSH SET UP
 
-# Add ssh to keychain to avoid password prompt everytime
-ssh-add -K ~/.ssh/id_rsa &>/dev/null
+# Add ssh to keychain to avoid password prompt everytime, macOS only
+# ssh-add -K ~/.ssh/id_rsa &>/dev/null
 
 #-------------------------------------------------
 # PROMPT BACKGROUND AND FOREGROUND
