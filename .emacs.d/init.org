@@ -171,8 +171,6 @@
          (ac-config-default)
          (setq ac-ignore-case nil)
          (global-auto-complete-mode t)
-         (add-to-list 'ac-modes 'typescript-mode)
-         (add-to-list 'ac-modes 'org-mode)
          ))
    #+END_SRC
 
@@ -320,39 +318,77 @@
      (add-hook 'css-mode-hook
                (lambda ()
                  (emmet-mode)
-                 (smartparens-mode)))
+                 (smartparens-mode)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
 
      (add-hook 'html-mode-hook
                (lambda ()
                  (emmet-mode)
-                 (smartparens-mode)))
+                 (smartparens-mode)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
 
      (add-hook 'python-mode-hook
                (lambda ()
                  (setq tab-width 2)
                  (setq python-indent-offset 2)
-                 (smartparens-mode)))
+                 (smartparens-mode)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
 
      (add-hook 'typescript-mode-hook
                (lambda ()
                  (setq typescript-indent-level 2)
-                 (smartparens-mode)))
+                 (smartparens-mode)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
 
      (add-hook 'js-mode-hook
                (lambda()
-                 (smartparens-mode)))
+                 (smartparens-mode)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
 
      (add-hook 'org-mode-hook
                (lambda ()
-                 (org-bullets-mode 1)))
+                 (org-bullets-mode 1)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
 
      (add-hook 'groovy-mode-hook
                (lambda ()
-                 (smartparens-mode)))
+                 (smartparens-mode)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
 
      (add-hook 'java-mode-hook
                (lambda ()
-                 (smartparens-mode)))
+                 (smartparens-mode)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
+
+     (add-hook 'yaml-mode-hook
+               (lambda ()
+                 (smartparens-mode)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
+
+     (add-hook 'sh-mode-hook
+               (lambda ()
+                 (smartparens-mode)
+                 (highlight-indentation-mode)
+                 (auto-complete-mode)
+                 ))
    #+END_SRC
 
 ** htmlize
@@ -372,6 +408,11 @@
 ** ag
    #+BEGIN_SRC emacs-lisp
      (use-package ag :ensure t)
+   #+END_SRC
+
+** highlight indentation
+   #+BEGIN_SRC emacs-lisp
+     (use-package highlight-indentation :ensure t)
    #+END_SRC
 
 * Native
