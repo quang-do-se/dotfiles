@@ -46,6 +46,9 @@
 
   blt = branch --sort=committerdate
 
+  brt = branch --remotes --sort=committerdate
+  # brt = ls-remote --heads --sort=committerdate
+
   c = commit
 
   cm = commit -m
@@ -79,8 +82,6 @@
   rbi = "!f() { git rebase -i $(git merge-base HEAD ${1-master}); }; f"
 
   alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
-
-  brt = ls-remote --heads --sort=committerdate
 
   quotes = !echo "\\\"$HOME\\\"" "$HOME"  \"$HOME\" '\"$HOME\"' '"$HOME"' '$HOME'
 
