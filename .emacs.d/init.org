@@ -152,8 +152,7 @@
 
 ** =avy= - go to char
    #+BEGIN_SRC emacs-lisp
-     (use-package avy
-       :bind ("M-s" . avy-goto-char))
+     (use-package avy :ensure t)
 
      (use-package avy-zap
        :init
@@ -655,6 +654,8 @@
 
      ;; shortcut for refresh buffer
      (global-set-key (kbd "C-c g") 'revert-buffer)
+
+     (global-set-key (kbd "M-s") 'avy-goto-char-2)
    #+END_SRC
 
 ** mode line format
