@@ -655,7 +655,8 @@
      ;; shortcut for refresh buffer
      (global-set-key (kbd "C-c g") 'revert-buffer)
 
-     (global-set-key (kbd "M-s") 'avy-goto-char)
+     (global-set-key (kbd "C-;") 'avy-goto-char)
+     (global-set-key (kbd "C-'") 'avy-goto-char-2)
    #+END_SRC
 
 ** mode line format
