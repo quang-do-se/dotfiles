@@ -637,7 +637,7 @@
          ))
    #+END_SRC
 
-** COMMENT key bindings
+** key bindings
    #+BEGIN_SRC emacs-lisp
      (global-set-key [(meta down)] 'move-line-down)
      (global-set-key [(meta up)] 'move-line-up)
