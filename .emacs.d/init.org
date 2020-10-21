@@ -5,6 +5,9 @@
 * Packages
 ** =use-package=
    #+BEGIN_SRC emacs-lisp
+     ;; disable 'Package cl is deprecated'
+     (setq byte-compile-warnings '(not obsolete))
+
      (require 'package)
 
      (setq package-enable-at-startup nil)
@@ -580,6 +583,7 @@
      (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
      (add-to-list 'auto-mode-alist '("\\.inc\\'" . php-mode))
    #+END_SRC
+
 ** tranpose lines
    #+BEGIN_SRC emacs-lisp
      (defun move-line-up ()
