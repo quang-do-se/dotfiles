@@ -459,6 +459,9 @@
 
      ;; Great 'line wrap' alternative for presentation
      ;; (global-visual-line-mode)
+
+     ;; Don't make any sound
+     (setq ring-bell-function 'ignore)
    #+END_SRC
 
 ** org-mode
@@ -690,9 +693,10 @@
 
      (setq-default mode-line-format
                    (list
-                    ;; day and time
-                    '(:eval (propertize (format-time-string " %b %d %H:%M ")
-                                        'face 'font-lock-builtin-face))
+
+                    ;; day and time - don't need date time that much, especially in multiple buffers
+                    ;; '(:eval (propertize (format-time-string " %b %d %H:%M ")
+                    ;;                     'face 'font-lock-builtin-face))
 
                     ;; the buffer name; the file name as a tool tip
                     '(:eval (propertize " %b "
@@ -722,5 +726,6 @@
                                                    ,(+ 2 (string-width mode-name)))))))
 
                     (propertize " %m " 'face 'font-lock-string-face)
+
                     ))
    #+END_SRC
