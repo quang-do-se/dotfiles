@@ -462,6 +462,8 @@
 
      ;; Don't make any sound
      (setq ring-bell-function 'ignore)
+
+     (setq gdb-many-windows t)
    #+END_SRC
 
 ** org-mode
