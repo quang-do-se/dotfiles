@@ -670,7 +670,7 @@
      (global-set-key (kbd "C-c g") 'revert-buffer)
 
      (global-set-key (kbd "C-;") 'avy-goto-char)
-     (global-set-key (kbd "C-'") 'avy-goto-char-2)
+     (global-set-key (kbd "C-M-;") 'avy-goto-char-2)
 
      (global-set-key (kbd "C-x g") 'magit-status)
    #+END_SRC
