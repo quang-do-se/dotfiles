@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+umask 0027
+
 # ALIAS
 alias rm="rm -i"
 alias rmd="rm -rfi"
