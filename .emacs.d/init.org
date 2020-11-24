@@ -502,11 +502,14 @@
      (tool-bar-mode -1)
      (scroll-bar-mode -1)
 
+
      ;; fullscreen mode - does not work with Mac
      ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
      ;; work both in Mac and Ubuntu
-     (toggle-frame-fullscreen)
+     ;; (toggle-frame-fullscreen)
+     (toggle-frame-maximized)
+
 
      ;; open new buffer vertically
      (setq split-width-threshold 0)
