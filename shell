@@ -20,7 +20,7 @@ alias all-functions="compgen -c"
 alias cdg="cd_git_project"
 alias g="git"
 alias lst="tree -a -I '.git' --charset=ascii"
-alias clock="watch -t -n1 date +%T"
+alias clock="display_clock"
 
 # map git completion to 'g'
 source /etc/bash_completion.d/git 2>/dev/null
@@ -96,6 +96,10 @@ qcc() {
     done
 }
 
+display_clock() {
+    # 8 is the length of hh:mm:ss
+    watch -t -n1 'printf "%0.s\n" $( seq 1 $(( $LINES/2 )) ); printf "%*s" $(( (8 + $COLUMNS)/2 )) $(date +%T);'
+}
 
 #-------------------------------------------------
 # ETERNAL BASH HISTORY
