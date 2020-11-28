@@ -66,7 +66,7 @@ qcc() {
 
 display_clock() {
     # 8 is the length of hh:mm:ss
-    watch -t -n 0.5 'printf "%0.s\n" $( seq 1 $(( $LINES/2 )) ); printf "%*s" $(( (8 + $COLUMNS)/2 )) $(date +%T);'
+    watch -t -p -n 0.5 'printf "%0.s\n" $( seq 1 $(( $LINES/2 )) ); printf "%*s" $(( (8 + $COLUMNS)/2 )) $(date +%T);'
 }
 
 # ubuntu only
