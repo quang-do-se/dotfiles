@@ -21,6 +21,7 @@ alias cdg="cd_git_project"
 alias g="git"
 alias lst="tree -a -I '.git' --charset=ascii"
 alias clock="display_clock"
+alias tty-clock="tty-clock -sc -C 7"
 
 # map git completion to 'g'
 source /etc/bash_completion.d/git 2>/dev/null
