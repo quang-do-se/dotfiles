@@ -6,6 +6,7 @@ umask 0027
 
 ###--------------------------------------------------------------------------------------------------
 # FUNCTIONS
+
 cd_up() {
     cd $(printf "%0.s../" $(seq 1 $1 ));
 }
@@ -259,6 +260,7 @@ fi
 
 ###--------------------------------------------------------------------------------------------------
 # ALIAS
+
 alias rm="rm -i"
 alias rmd="rm -rfi"
 alias emacs="emacs -nw"
@@ -299,11 +301,3 @@ complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null # linux
 # Enable recursive glob, e.g. ls **/*.py
 shopt -s globstar 2>/dev/null
 shopt -s extglob
-
-
-
-
-
-
-
-
