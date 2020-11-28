@@ -20,6 +20,7 @@ alias all-functions="compgen -c"
 alias cdg="cd_git_project"
 alias g="git"
 alias lst="tree -a -I '.git' --charset=ascii"
+alias clock="watch -t -n1 date +%T"
 
 # map git completion to 'g'
 source /etc/bash_completion.d/git 2>/dev/null
