@@ -256,6 +256,11 @@ then
     export PATH="$HOME/bin:$PATH"
 fi
 
+if [ -d "$HOME/.local/bin" ] && ! grep -q "$HOME/.local/bin" <<< "${PATH}";
+then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
 
 
 ###--------------------------------------------------------------------------------------------------
