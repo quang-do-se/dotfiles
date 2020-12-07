@@ -215,12 +215,12 @@ get_vpn_prompt() {
 get_python_venv() {
     if [ ! -z $VIRTUAL_ENV ];
     then
-        printf "(%s)" $(basename ${VIRTUAL_ENV})
+        printf "(%s) " $(basename ${VIRTUAL_ENV})
     fi
 }
 
 set_bash_prompt() {
-    PS1="${SET}$(get_python_venv) ${FG_WHITE}${BG_RED}\u$(get_vpn_prompt)${RESET}${FG_CYAN} \A${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
+    PS1="${SET}$(get_python_venv)${FG_WHITE}${BG_RED}\u$(get_vpn_prompt)${RESET}${FG_CYAN} \A${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
 }
 
 
