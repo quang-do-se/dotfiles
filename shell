@@ -268,6 +268,12 @@ then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
+# python virtualenvwrapper
+export WORKON_HOME="$HOME/.virtualenvs"
+export PROJECT_HOME="$HOME/projects"
+export VIRTUALENVWRAPPER_PYTHON="$(which python3)"
+export VIRTUALENVWRAPPER_VIRTUALENV="$(which virtualenv)"
+
 
 
 ###--------------------------------------------------------------------------------------------------
@@ -297,7 +303,7 @@ alias paste="xclip -selection clipboard -o" # ubuntu only
 
 
 ###--------------------------------------------------------------------------------------------------
-# MISC
+# MISC - sourcing and options
 
 # map git completion to 'g'
 source /etc/bash_completion.d/git 2>/dev/null
@@ -313,3 +319,5 @@ complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null # linux
 # Enable recursive glob, e.g. ls **/*.py
 shopt -s globstar 2>/dev/null
 shopt -s extglob
+
+source $(which virtualenvwrapper.sh) 2>/dev/null
