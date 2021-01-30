@@ -313,7 +313,8 @@ source /usr/share/bash-completion/completions/git 2>/dev/null
     && . "/usr/local/etc/profile.d/bash_completion.sh" \
     && __git_complete g __git_main 2>/dev/null # mac
 
-complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null # linux
+# This may change. Use `complete | grep -i git` or `compgen -c | grep -i git` to check
+complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g 2>/dev/null # linux
 
 # Bash 4+ specific
 # Enable recursive glob, e.g. ls **/*.py
