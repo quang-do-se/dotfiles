@@ -268,10 +268,12 @@ then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
+export PATH="~/.npm-global/bin:$PATH"
+
 # python virtualenvwrapper
 export WORKON_HOME="$HOME/.virtualenvs"
 export PROJECT_HOME="$HOME/projects"
-export VIRTUALENVWRAPPER_PYTHON="$(which python3)"
+# export VIRTUALENVWRAPPER_PYTHON="$(which python3)"
 export VIRTUALENVWRAPPER_VIRTUALENV="$(which virtualenv)"
 
 
