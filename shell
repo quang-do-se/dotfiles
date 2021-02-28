@@ -14,9 +14,6 @@ umask 0027
 
 catch() {
     echo "Shell init had error $1 on line $2"
-
-    # reset, don't catch subsequent errors
-    trap '' ERR
 }
 
 cd_up() {
@@ -341,3 +338,9 @@ complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g 2>/dev/n
 # Enable recursive glob, e.g. ls **/*.py
 shopt -s globstar 2>/dev/null
 shopt -s extglob
+
+
+
+# Reset trap, don't catch subsequent errors. This is because 'source' can have side effect and make trap avaiable to current shell
+trap '' ERR
+trap - ERR
