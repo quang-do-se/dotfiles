@@ -1,4 +1,11 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+
+set -o pipefail
+
+trap 'catch $? $LINENO' ERR
+
+
 
 ### File & directory default permission (g-w o-rwx)
 umask 0027
@@ -7,6 +14,10 @@ umask 0027
 
 ###--------------------------------------------------------------------------------------------------
 # FUNCTIONS
+
+catch() {
+  echo "Shell init had error $1 on line $2"
+}
 
 cd_up() {
     cd $(printf "%0.s../" $(seq 1 $1 ));
