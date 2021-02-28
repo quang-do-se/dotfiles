@@ -33,7 +33,7 @@ emacsclient-edit() {
 }
 
 trash() {
-    mv "$@" ~/.Trash/
+    mv "$@" "$HOME/.Trash/"
 }
 
 gitgraph() {
@@ -106,13 +106,29 @@ copy() {
     fi
 }
 
+clear_and_load() {
+    clear
+    if [ -f "$HOME/.bashrc" ];
+    then
+        source "$HOME/.bashrc"
+    fi
 
+    if [ -f "$HOME/.bash_profile" ];
+    then
+        source "$HOME/.bash_profile"
+    fi
+
+    if [ -f "$HOME/.profile" ];
+    then
+        source "$HOME/.profile"
+    fi
+}
 
 ###--------------------------------------------------------------------------------------------------
 # SSH SET UP
 
 # Add ssh to keychain to avoid password prompt everytime, macOS only
-# ssh-add -K ~/.ssh/id_rsa &>/dev/null
+# ssh-add -K "$HOME/.ssh/id_rsa" &>/dev/null
 
 
 
@@ -242,7 +258,7 @@ export HISTTIMEFORMAT="[%F %T] "
 
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
-export HISTFILE=~/.bash_eternal_history
+export HISTFILE="$HOME/.bash_eternal_history"
 
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
@@ -268,7 +284,21 @@ then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH="$HOME/.npm-global/bin:$PATH"
+
+export NPM_CONFIG_PREFIX="$HOME/.npm-global/bin"
+export N_PREFIX="$HOME/.n"
+
+if [ ! -d "$NPM_CONFIG_PREFIX" ];
+then
+    mkdir -p "$NPM_CONFIG_PREFIX"
+fi
+
+if [ ! -d "$N_PREFIX" ];
+then
+    mkdir -p "$N_PREFIX"
+fi
+
+export PATH="$NPM_CONFIG_PREFIX/bin:$N_PREFIX/bin:$PATH"
 
 # python virtualenvwrapper
 export WORKON_HOME="$HOME/.virtualenvs"
@@ -293,7 +323,7 @@ alias dc="docker-compose"
 alias dce="docker-compose exec"
 alias d-stop-all="docker-container-stop-all"
 alias c="clear"
-alias cl="clear; { test -f ~/.bashrc && source ~/.bashrc; } || { test -f ~/.bash_profile && source ~/.bash_profile; } || { test -f ~/.profile && source ~/.profile; }"
+alias cl="clear_and_load"
 alias all-functions="compgen -c"
 alias cdg="cd_git_project"
 alias 'cd..'='cd_up'

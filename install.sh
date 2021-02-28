@@ -2,25 +2,25 @@
 
 BASEDIR=$(cd -- "$(dirname -- "$0")" && pwd - P)
 
-if [ ! -d "~/.emacs.d/snippets" ];
+if [ ! -d "$HOME/.emacs.d/snippets" ];
 then
-    mkdir -p ~/.emacs.d/snippets
+    mkdir -p "$HOME/.emacs.d/snippets"
 fi
 
-cp "$BASEDIR/.emacs" ~/.emacs && cp "$BASEDIR/.emacs.d/init.org" ~/.emacs.d/init.org
+cp "$BASEDIR/.emacs" "$HOME/.emacs" && cp "$BASEDIR/.emacs.d/init.org" "$HOME/.emacs.d/init.org"
 
 source_path="source $BASEDIR/shell"
 
-if ! grep -q "$source_path" ~/.bashrc; then
-    printf "\n%s" "$source_path" >> ~/.bashrc
+if ! grep -q "$source_path" "$HOME/.bashrc"; then
+    printf "\n%s" "$source_path" >> "$HOME/.bashrc"
 fi
 
-if ! grep -q "$source_path" ~/.profile; then
-    printf "\n%s" "$source_path" >> ~/.profile
+if ! grep -q "$source_path" "$HOME/.profile"; then
+    printf "\n%s" "$source_path" >> "$HOME/.profile"
 fi
 
-cp "$BASEDIR/.gitconfig" ~/.gitconfig
-cp "$BASEDIR/.gitexcludes" ~/.gitexcludes
+cp "$BASEDIR/.gitconfig" "$HOME/.gitconfig"
+cp "$BASEDIR/.gitexcludes" "$HOME/.gitexcludes"
 
 sudo sh <<EOF
 if [ -f /root/.bashrc ] && ! grep -q "$source_path" /root/.bashrc ; then
