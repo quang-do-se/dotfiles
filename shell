@@ -325,7 +325,10 @@ fi
 
 if [ -r "/usr/local/etc/profile.d/bash_completion.sh" ]; then
     source "/usr/local/etc/profile.d/bash_completion.sh"
-    __git_complete g __git_main 2>/dev/null # mac
+
+    if [ $? -eq 0 ]; then
+        __git_complete g __git_main 2>/dev/null # mac
+    fi
 fi
 
 # This may change. Use `complete | grep -i git` or `compgen -c | grep -i git` to check
