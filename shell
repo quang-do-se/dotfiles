@@ -106,17 +106,17 @@ clear_and_load() {
     clear
     if [ -f "$HOME/.bashrc" ]; then
         source "$HOME/.bashrc"
-        exit
+        return 0
     fi
 
     if [ -f "$HOME/.bash_profile" ]; then
         source "$HOME/.bash_profile"
-        exit
+        return 0
     fi
 
     if [ -f "$HOME/.profile" ]; then
         source "$HOME/.profile"
-        exit
+        return 0
     fi
 }
 
@@ -281,12 +281,6 @@ fi
 
 export PATH="$NPM_CONFIG_PREFIX/bin:$N_PREFIX/bin:$PATH"
 
-# python virtualenvwrapper
-export WORKON_HOME="$HOME/.virtualenvs"
-export PROJECT_HOME="$HOME/projects"
-# export VIRTUALENVWRAPPER_PYTHON="$(which python3)"
-export VIRTUALENVWRAPPER_VIRTUALENV="$(which virtualenv)"
-
 
 
 ###--------------------------------------------------------------------------------------------------
@@ -333,5 +327,3 @@ complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g 2>/dev/n
 # Enable recursive glob, e.g. ls **/*.py
 shopt -s globstar 2>/dev/null
 shopt -s extglob
-
-source $(which virtualenvwrapper.sh) 2>/dev/null
