@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+### File & directory default permission (g-w o-rwx)
 umask 0027
 
 
@@ -18,8 +19,7 @@ docker-container-stop-all() {
 cd_git_project() {
     pdir=$(git rev-parse --show-toplevel 2>/dev/null)
 
-    if [ ! -z "${pdir}" ]
-    then
+    if [ ! -z "${pdir}" ]; then
         cd "${pdir}"
     fi
 }
@@ -71,22 +71,19 @@ display_clock() {
 
 # ubuntu only
 copy() {
-    if ! type xclip > /dev/null 2>&1; # Check that xclip is installed.
-    then
+    if ! type xclip > /dev/null 2>&1; then # Check that xclip is installed.
         printf "You must have the 'xclip' program installed.\n"
-    elif [ "$USER" == "root" ]; # Check user is not root (root doesn't have access to user xorg server)
-    then
+    elif [ "$USER" == "root" ]; then # Check user is not root (root doesn't have access to user xorg server)
         printf "Must be regular user (not root) to copy a file to the clipboard.\n"
     else
-        if  [ -t 0 ]; # Check if FD 0 (standard input) is hooked up to a TTY. False if running in a pipeline
-        then # Fetch input from params
+        if  [ -t 0 ]; then # Check if FD 0 (standard input) is hooked up to a TTY. False if running in a pipeline
+            # Fetch input from params
             input="$*"
         else # Fetch input from stdin since pipe sends it there
             input="$(< /dev/stdin)"
         fi
 
-        if [ -z "$input" ];
-        then # If no input, print usage message.
+        if [ -z "$input" ]; then # If no input, print usage message.
             printf "Copies a string to the clipboard.\n"
             printf "Usage: copy <string>\n"
             printf "       printf <string> | copy\n"
@@ -95,8 +92,7 @@ copy() {
             printf -- "$input" | xclip -selection c
 
             # Truncate text for status
-            if [ ${#input} -gt 80 ];
-            then
+            if [ ${#input} -gt 80 ]; then
                 input="$(printf -- "$input" | cut -c1-80 | head -n 5)...\n";
             fi
 
@@ -108,18 +104,15 @@ copy() {
 
 clear_and_load() {
     clear
-    if [ -f "$HOME/.bashrc" ];
-    then
+    if [ -f "$HOME/.bashrc" ]; then
         source "$HOME/.bashrc"
     fi
 
-    if [ -f "$HOME/.bash_profile" ];
-    then
+    if [ -f "$HOME/.bash_profile" ]; then
         source "$HOME/.bash_profile"
     fi
 
-    if [ -f "$HOME/.profile" ];
-    then
+    if [ -f "$HOME/.profile" ]; then
         source "$HOME/.profile"
     fi
 }
@@ -166,24 +159,20 @@ get_git_prompt() {
     # if there is no branch, don't display anything
     # quote the variable in case of string with multiple words
     # -z if the string length is zero
-    if [ -z "${current_branch}" ];
-    then
+    if [ -z "${current_branch}" ]; then
         return 0
     fi
 
     remote_tracking_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null);
 
-    if [ ! -z "${remote_tracking_branch}" ];
-    then
+    if [ ! -z "${remote_tracking_branch}" ]; then
         read ahead behind <<< $(git rev-list --left-right --count ${current_branch}...${remote_tracking_branch} 2>/dev/null)
 
-        if [ ${ahead} -gt 0 ];
-        then
+        if [ ${ahead} -gt 0 ]; then
             current_branch=${current_branch}' ↑'${ahead}
         fi
 
-        if [ ${behind} -gt 0 ];
-        then
+        if [ ${behind} -gt 0 ]; then
             current_branch=${current_branch}' ↓'${behind}
         fi
     fi
@@ -194,22 +183,19 @@ get_git_prompt() {
 
     git_conflict_count=$(git diff --name-only --diff-filter=U 2>/dev/null | wc -l | tr -d ' ')
 
-    if [ ${git_status_count} -eq 0 ];
-    then
+    if [ ${git_status_count} -eq 0 ]; then
         git_status_count=${FG_BRIGHT_GREEN}'✔' # ✔✓
     else
         git_status_count='▲'${git_status_count}
     fi
 
-    if [ ${git_stash_count} -eq 0 ];
-    then
+    if [ ${git_stash_count} -eq 0 ]; then
         git_stash_count=''
     else
         git_stash_count='⚑'${git_stash_count}
     fi
 
-    if [ ${git_conflict_count} -eq 0 ];
-    then
+    if [ ${git_conflict_count} -eq 0 ]; then
         git_conflict_count=''
     else
         git_conflict_count=${FG_RED}'✗'${git_conflict_count}
@@ -222,15 +208,13 @@ get_git_prompt() {
 get_vpn_prompt() {
     is_vpn=$(pgrep -x openconnect)
 
-    if [ $? -eq 0 ];
-    then
+    if [ $? -eq 0 ]; then
         printf ' (VPN)'
     fi
 }
 
 get_python_venv() {
-    if [ ! -z $VIRTUAL_ENV ];
-    then
+    if [ ! -z $VIRTUAL_ENV ]; then
         printf "(%s) " $(basename ${VIRTUAL_ENV})
     fi
 }
@@ -262,25 +246,21 @@ export HISTFILE="$HOME/.bash_eternal_history"
 
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
-if ! grep -q 'history -a' <<< "${PROMPT_COMMAND}";
-then
+if ! grep -q 'history -a' <<< "${PROMPT_COMMAND}"; then
     PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 fi
 
 # Note: append to PROMPT_COMMAND to keep default prompt behavior
 # use PROMPT_COMMAND to be able to eload the whole PS1 and refresh prompt color correctly
-if ! grep -q 'set_bash_prompt' <<< "${PROMPT_COMMAND}";
-then
+if ! grep -q 'set_bash_prompt' <<< "${PROMPT_COMMAND}"; then
     PROMPT_COMMAND="set_bash_prompt; $PROMPT_COMMAND"
 fi
 
-if ! grep -q "$HOME/bin" <<< "${PATH}";
-then
+if ! grep -q "$HOME/bin" <<< "${PATH}"; then
     export PATH="$HOME/bin:$PATH"
 fi
 
-if [ -d "$HOME/.local/bin" ] && ! grep -q "$HOME/.local/bin" <<< "${PATH}";
-then
+if [ -d "$HOME/.local/bin" ] && ! grep -q "$HOME/.local/bin" <<< "${PATH}"; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
@@ -288,13 +268,11 @@ fi
 export NPM_CONFIG_PREFIX="$HOME/.npm-global"
 export N_PREFIX="$HOME/.n"
 
-if [ ! -d "$NPM_CONFIG_PREFIX" ];
-then
+if [ ! -d "$NPM_CONFIG_PREFIX" ]; then
     mkdir -p "$NPM_CONFIG_PREFIX"
 fi
 
-if [ ! -d "$N_PREFIX" ];
-then
+if [ ! -d "$N_PREFIX" ]; then
     mkdir -p "$N_PREFIX"
 fi
 

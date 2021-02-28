@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+# Fail fast
+set -e
+
 BASEDIR=$(cd -- "$(dirname -- "$0")" && pwd - P)
 
 if [ ! -d "$HOME/.emacs.d/snippets" ];
