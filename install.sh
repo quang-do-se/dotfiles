@@ -1,4 +1,14 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+set -o pipefail
+
+trap 'catch $? $LINENO' ERR
+
+catch() {
+    echo "Shell install had error $1 on line $2"
+}
+
+
 
 BASEDIR=$(cd -- "$(dirname -- "$0")" && pwd - P)
 
