@@ -106,14 +106,17 @@ clear_and_load() {
     clear
     if [ -f "$HOME/.bashrc" ]; then
         source "$HOME/.bashrc"
+        exit
     fi
 
     if [ -f "$HOME/.bash_profile" ]; then
         source "$HOME/.bash_profile"
+        exit
     fi
 
     if [ -f "$HOME/.profile" ]; then
         source "$HOME/.profile"
+        exit
     fi
 }
 
