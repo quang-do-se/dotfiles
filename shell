@@ -4,8 +4,6 @@ set -o pipefail
 
 trap 'catch $? $LINENO' ERR
 
-
-
 ### File & directory default permission (g-w o-rwx)
 umask 0027
 
@@ -15,7 +13,10 @@ umask 0027
 # FUNCTIONS
 
 catch() {
-  echo "Shell init had error $1 on line $2"
+    echo "Shell init had error $1 on line $2"
+
+    # reset, don't catch subsequent errors
+    trap '' ERR
 }
 
 cd_up() {
@@ -331,14 +332,6 @@ fi
 
 if [ -f "/usr/share/bash-completion/completions/git" ]; then
     source "/usr/share/bash-completion/completions/git" 2>/dev/null
-fi
-
-if [ -r "/usr/local/etc/profile.d/bash_completion.sh" ]; then
-    source "/usr/local/etc/profile.d/bash_completion.sh"
-
-    if [ $? -eq 0 ]; then
-        __git_complete g __git_main 2>/dev/null # mac
-    fi
 fi
 
 # This may change. Use `complete | grep -i git` or `compgen -c | grep -i git` to check
