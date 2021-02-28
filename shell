@@ -285,7 +285,7 @@ then
 fi
 
 
-export NPM_CONFIG_PREFIX="$HOME/.npm-global/bin"
+export NPM_CONFIG_PREFIX="$HOME/.npm-global"
 export N_PREFIX="$HOME/.n"
 
 if [ ! -d "$NPM_CONFIG_PREFIX" ];
