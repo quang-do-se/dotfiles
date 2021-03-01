@@ -99,6 +99,7 @@
 
 [init]
   templatedir = ~/.git-template
+  defaultBranch = main
 
 [color]
   branch = auto
