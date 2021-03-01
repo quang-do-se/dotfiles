@@ -226,14 +226,8 @@ get_vpn_prompt() {
     fi
 }
 
-get_python_venv() {
-    if [ ! -z $VIRTUAL_ENV ]; then
-        printf "(%s) " $(basename ${VIRTUAL_ENV})
-    fi
-}
-
 set_bash_prompt() {
-    PS1="${SET}$(get_python_venv)${FG_WHITE}${BG_RED}\u$(get_vpn_prompt)${RESET}${FG_CYAN} \A${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
+    PS1="${SET}${FG_WHITE}${BG_RED}\u$(get_vpn_prompt)${RESET}${FG_CYAN} \A${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
 }
 
 
@@ -331,10 +325,6 @@ if [ -f "/usr/share/bash-completion/completions/git" ]; then
     source "/usr/share/bash-completion/completions/git" 2>/dev/null
 fi
 
-if command -v __git_complete &> /dev/null; then
-    __git_complete g __git_main 2>/dev/null
-fi
-
 # This may change. Use `complete | grep -i git` or `compgen -c | grep -i git` to check
 complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g 2>/dev/null # linux
 
@@ -348,3 +338,5 @@ shopt -s extglob
 # Reset trap, don't catch subsequent errors. This is because 'source' can have side effect and make trap avaiable to current shell
 trap '' ERR
 trap - ERR
+
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh" # macOS git completion
