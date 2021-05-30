@@ -283,7 +283,13 @@ if [ ! -d "$N_PREFIX" ]; then
     mkdir -p "$N_PREFIX"
 fi
 
-export PATH="$NPM_CONFIG_PREFIX/bin:$N_PREFIX/bin:$PATH"
+if ! grep -q "$NPM_CONFIG_PREFIX" <<< "${PATH}"; then
+    export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+fi
+
+if ! grep -q "$N_PREFIX" <<< "${PATH}"; then
+    export PATH="$N_PREFIX/bin:$PATH"
+fi
 
 
 
