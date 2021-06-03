@@ -181,11 +181,11 @@ get_git_prompt() {
     if [ ! -z "${remote_tracking_branch}" ]; then
         read ahead behind <<< $(git rev-list --left-right --count ${current_branch}...${remote_tracking_branch} 2>/dev/null)
 
-        if [ ! -z ${ahead} && ${ahead} -gt 0 ]; then
+        if [ ! -z ${ahead} ] && [ ${ahead} -gt 0 ]; then
             current_branch=${current_branch}' ↑'${ahead}
         fi
 
-        if [ ! -z ${behind} && ${behind} -gt 0 ]; then
+        if [ ! -z ${behind} ] && [ ${behind} -gt 0 ]; then
             current_branch=${current_branch}' ↓'${behind}
         fi
     fi
