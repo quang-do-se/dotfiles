@@ -115,7 +115,7 @@ copy() {
 }
 
 search-history() {
-  grep -irh -A 3 -B 3 "$@" "${HISTDIR}"
+  grep -irh -B 1 "$@" "${HISTDIR}" | sed -E 's/^#([0-9]+).*$/date +"${HISTTIMEFORMAT}" -d @\1/e'
 }
 
 clear_and_load() {
@@ -265,7 +265,7 @@ export HISTDIR="${HOME}/.bash_history.d"
 
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
-export HISTFILE="${HISTDIR}/$(date +"%Y%m%d")"
+export HISTFILE="${HISTDIR}/$(date +"%Y%m")"
 
 shopt -s histappend
 
