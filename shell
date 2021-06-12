@@ -115,8 +115,7 @@ copy() {
 }
 
 search-history() {
-    my_var="testing"
-    grep -irh -B 1 "$@" "${HISTDIR}" | sed -E 's/^#([0-9]+).*$/printf "\\e[00m\\e[01;48;5;046;38;5;016m%s%s\\e[m" "$(date +"[%F %T]" -d @\1)" "${my_var}"/e'
+    grep -irh -B 1 "$@" "${HISTDIR}" | sed -E 's/^#([0-9]+).*$/printf "\\e[00m\\e[01;48;5;046;38;5;016m%s%s\\e[m" "$(date +"[%F %T]" -d @\1)"/e'
 }
 
 clear_and_load() {
