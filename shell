@@ -115,7 +115,7 @@ copy() {
 }
 
 search-history() {
-  grep -irh -B 1 "$@" "${HISTDIR}" | sed -E 's/^#([0-9]+).*$/date +"${HISTTIMEFORMAT}" -d @\1/e'
+    grep -irh -B 1 "$@" "${HISTDIR}" | sed -E 's/^#([0-9]+).*$/${SET}${BG_GREEN}date +"${HISTTIMEFORMAT}" -d @\1 ${RESET}/e'
 }
 
 clear_and_load() {
@@ -152,17 +152,20 @@ clear_and_load() {
 prompt_color_escape() {
     # Make sure using escape \] for PS1
     printf '\[\e['$@'m\]'
+    # printf '\[\033['$@'m\]' # alternative
 
-    # echo '\[\033['$@'m\]'
+    # To use in terminal
+    # echo -e "\e[00m""\e[48;5;046m""\e[38;5;016m""\e[01m""testing""\e[m"
 }
 
-set=$(prompt_color_escape '00')
+SET=$(prompt_color_escape '00')
 RESET=$(prompt_color_escape '')
 
 # 01; bold text version of that color
 # 38;5;[000-255] foreground color
 # 48;5;[000-255] background color
 BG_RED=$(prompt_color_escape '48;5;196')
+BG_GREEN=$(prompt_color_escape '48;5;046')
 
 FG_CYAN=$(prompt_color_escape '01;38;5;075')
 FG_BRIGHT_GREEN=$(prompt_color_escape '01;38;5;118')
