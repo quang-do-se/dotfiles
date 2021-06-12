@@ -115,7 +115,7 @@ copy() {
 }
 
 search-history() {
-    grep -irh -B 1 "$@" "${HISTDIR}" | sed -E 's/^#([0-9]+).*$/${SET}${BG_GREEN}date +"${HISTTIMEFORMAT}" -d @\1 ${RESET}/e'
+    grep -irh -B 1 "$@" "${HISTDIR}" | sed -E 's/^#([0-9]+).*$/date +"${HISTTIMEFORMAT}" -d @\1/e'
 }
 
 clear_and_load() {
