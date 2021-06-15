@@ -88,6 +88,8 @@
   # get project root directory
   pdir = rev-parse --show-toplevel
 
+  cherry-pit = "!f() { git rebase --onto $1^ $1 HEAD; }; f"
+
 [diff]
   tool=e
 
