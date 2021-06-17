@@ -14,6 +14,7 @@
   ignorecase = true
   autocrlf = false  # don't convert line ending
   eol = lf # always use Unix line ending
+  filemode = false
 
 [pull]
   rebase = false # merge (the default strategy)
