@@ -36,6 +36,11 @@ emacsclient-read-only() {
     emacsclient -q -u -nw -e "(find-file-read-only \"$1\")" 2>/dev/null
 }
 
+emacsclient-dedicate() {
+    (nohup emacsclient -q -u -c -F "'(fullscreen . maximized)" -e "(select-frame-set-input-focus (selected-frame))" -e "(find-file-read-only \"$1\")" &>/dev/null &)
+}
+
+
 emacsclient-edit() {
     emacsclient -q -u -nw "$1" 2>/dev/null
 }
@@ -318,7 +323,7 @@ fi
 alias watch="watch "
 alias rm="rm -i"
 alias rmd="rm -rfi"
-alias emacs="emacs -nw"
+alias emacs="emacsclient-dedicate"
 alias ek="emacsclient -e '(kill-emacs)'"
 alias ev="emacsclient-read-only"
 alias em="emacsclient-edit"
