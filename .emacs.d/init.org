@@ -741,5 +741,5 @@
 
    #+BEGIN_SRC emacs-lisp
      (custom-set-faces
-      '(line-number ((t (:background "gruvbox-dark1" :foreground "white smoke")))))
+      '(line-number ((t (:background "#1d2021" :foreground "#ffffd7")))))
    #+END_SRC
