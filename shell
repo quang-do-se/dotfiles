@@ -41,7 +41,11 @@ emacsclient-edit() {
 }
 
 trash() {
-    mv "$@" "$HOME/.Trash/"
+    if [ ! -d "${HOME}/.trash" ]; then
+        mkdir -p "${HOME}/.trash"
+    fi
+
+    mv "$@" "$HOME/.trash/"
 }
 
 gitgraph() {
