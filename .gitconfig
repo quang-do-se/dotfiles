@@ -91,6 +91,8 @@
 
   cherry-pit = "!f() { git rebase --onto $1^ $1 HEAD; }; f"
 
+  squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\"); }; f"
+
 [diff]
   tool=e
 
