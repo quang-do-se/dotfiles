@@ -300,6 +300,7 @@ fi
 ###--------------------------------------------------------------------------------------------------
 # ALIAS
 
+alias watch="watch "
 alias rm="rm -i"
 alias rmd="rm -rfi"
 alias emacs="emacs -nw"
