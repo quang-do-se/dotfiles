@@ -568,6 +568,13 @@
      (setq tramp-verbose 0)
    #+END_SRC
 
+** whitespace mode
+
+   #+BEGIN_SRC emacs-lisp
+     ;; Set whitespace-toggle-options
+     (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
+   #+END_SRC
+
 * Custom functions
 
 ** Assign mode based on file extension
