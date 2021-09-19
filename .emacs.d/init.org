@@ -321,7 +321,6 @@
                (lambda ()
                  (emmet-mode)
                  (smartparens-mode)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
 
@@ -329,7 +328,6 @@
                (lambda ()
                  (emmet-mode)
                  (smartparens-mode)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
 
@@ -338,7 +336,6 @@
                  (setq tab-width 2)
                  (setq python-indent-offset 2)
                  (smartparens-mode)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
 
@@ -346,49 +343,42 @@
                (lambda ()
                  (setq typescript-indent-level 2)
                  (smartparens-mode)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
 
      (add-hook 'js-mode-hook
                (lambda()
                  (smartparens-mode)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
 
      (add-hook 'org-mode-hook
                (lambda ()
                  (org-bullets-mode 1)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
 
      (add-hook 'groovy-mode-hook
                (lambda ()
                  (smartparens-mode)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
 
      (add-hook 'java-mode-hook
                (lambda ()
                  (smartparens-mode)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
 
      (add-hook 'yaml-mode-hook
                (lambda ()
                  (smartparens-mode)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
 
      (add-hook 'sh-mode-hook
                (lambda ()
                  (smartparens-mode)
-                 (highlight-indentation-mode)
                  (auto-complete-mode)
                  ))
    #+END_SRC
