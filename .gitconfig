@@ -93,6 +93,8 @@
 
   squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\"); }; f"
 
+  backup = "!f() { git stash && git checkout -b $(git symbolic-ref --short HEAD 2>/dev/null)-$(date +'%Y%m%d%H%M%S') && git checkout -; }; f"
+
 [diff]
   tool=e
 
