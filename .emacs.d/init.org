@@ -322,6 +322,7 @@
                  (emmet-mode)
                  (smartparens-mode)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'html-mode-hook
@@ -329,6 +330,7 @@
                  (emmet-mode)
                  (smartparens-mode)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'python-mode-hook
@@ -337,6 +339,7 @@
                  (setq python-indent-offset 2)
                  (smartparens-mode)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'typescript-mode-hook
@@ -344,42 +347,49 @@
                  (setq typescript-indent-level 2)
                  (smartparens-mode)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'js-mode-hook
                (lambda()
                  (smartparens-mode)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'org-mode-hook
                (lambda ()
                  (org-bullets-mode 1)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'groovy-mode-hook
                (lambda ()
                  (smartparens-mode)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'java-mode-hook
                (lambda ()
                  (smartparens-mode)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'yaml-mode-hook
                (lambda ()
                  (smartparens-mode)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'sh-mode-hook
                (lambda ()
                  (smartparens-mode)
                  (auto-complete-mode)
+                 (highlight-indent-guides-mode)
                  ))
    #+END_SRC
 
@@ -402,9 +412,10 @@
      (use-package ag :ensure t)
    #+END_SRC
 
-** highlight indentation
+** highlight indentation guides
    #+BEGIN_SRC emacs-lisp
-     (use-package highlight-indentation :ensure t)
+     (use-package highlight-indent-guides :ensure t)
+     (setq highlight-indent-guides-method 'character)
    #+END_SRC
 
 ** magit
