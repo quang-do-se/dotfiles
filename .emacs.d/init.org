@@ -416,6 +416,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package highlight-indent-guides :ensure t)
      (setq highlight-indent-guides-method 'character)
+     (set-face-foreground 'highlight-indent-guides-character-face "grey25")
    #+END_SRC
 
 ** magit
