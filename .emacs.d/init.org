@@ -316,6 +316,7 @@
      (use-package php-mode)
      (use-package sml-mode)
      (use-package typescript-mode)
+     (use-package apache-mode)
 
      (add-hook 'css-mode-hook
                (lambda ()
