@@ -362,7 +362,6 @@
                (lambda ()
                  (org-bullets-mode 1)
                  (auto-complete-mode)
-                 (highlight-indent-guides-mode)
                  ))
 
      (add-hook 'groovy-mode-hook
