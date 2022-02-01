@@ -171,7 +171,7 @@
        (progn
          (ac-config-default)
          (setq ac-ignore-case nil)
-         (global-auto-complete-mode t)
+         (global-auto-complete-mode 0)
          ))
    #+END_SRC
 
@@ -333,15 +333,6 @@
                  (highlight-indent-guides-mode)
                  ))
 
-     (add-hook 'python-mode-hook
-               (lambda ()
-                 (setq tab-width 4)
-                 (setq python-indent-offset 4)
-                 (smartparens-mode)
-                 (auto-complete-mode)
-                 (highlight-indent-guides-mode)
-                 ))
-
      (add-hook 'typescript-mode-hook
                (lambda ()
                  (setq typescript-indent-level 2)
@@ -435,7 +426,7 @@
      (add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
      (add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
 
-     (elpy-rpc-reinstall-virtualenv)
+     ;;; (elpy-rpc-reinstall-virtualenv)
    #+end_src
 
 * Native
