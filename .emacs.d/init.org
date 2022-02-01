@@ -427,9 +427,15 @@
    #+begin_src emacs-lisp
      (use-package elpy
        :ensure t
-       :defer t
        :init
-       (advice-add 'python-mode :before 'elpy-enable))
+       (elpy-enable))
+
+     (setenv "PYTHONIOENCODING" "utf-8")
+     (add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
+     (add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
+     (add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
+
+     (elpy-rpc-reinstall-virtualenv)
    #+end_src
 
 * Native
@@ -558,10 +564,10 @@
 
 ** tab
    #+BEGIN_SRC emacs-lisp
-     ;; change tab to 2 spaces
-     (setq-default c-basic-offset 2
+     ;; change tab to 2 spaces for js
+     (setq-default c-basic-offset 4
                    js-indent-level 2
-                   tab-width 2)
+                   tab-width 4)
 
      (setq-default indent-tabs-mode nil)
 
