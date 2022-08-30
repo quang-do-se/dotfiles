@@ -58,7 +58,7 @@
 
   chb = checkout -b
 
-  chm = checkout master
+  chm = checkout main
 
   d = diff
 
@@ -77,10 +77,10 @@
   conflict-check = diff --check
 
   # Update a local branch to match a remote branch
-  bu = "!f() { git stash && git checkout -f ${1-master} && git fetch --all && git reset --hard origin/${1-master} && git checkout - && git rebase ${1-master}; }; f"
+  bu = "!f() { git stash && git checkout -f ${1-main} && git fetch --all && git reset --hard origin/${1-main} && git checkout - && git rebase ${1-main}; }; f"
 
   # Update a target branch and then rebase interactively with that branch
-  rbi = "!f() { git rebase -i $(git merge-base HEAD ${1-master}); }; f"
+  rbi = "!f() { git rebase -i $(git merge-base HEAD ${1-main}); }; f"
 
   alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 
