@@ -343,6 +343,7 @@ alias clock="display_clock"
 alias paste="xclip -selection clipboard -o" # ubuntu only
 alias timestamp='date +"%Y%m%d%H%M%S"'
 alias cal='ncal -C -3'
+alias cal='ncal -3'
 
 
 
