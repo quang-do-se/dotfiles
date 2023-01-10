@@ -11,7 +11,7 @@
 [core]
   editor = emacsclient -q -u -nw 2>/dev/null
   pager = less  # `git show` invokes pager and uses editor that accepts stdin
-  ignorecase = true
+  ignorecase = false
   autocrlf = false  # don't convert line ending
   eol = lf # always use Unix line ending
   filemode = false
