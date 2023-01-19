@@ -29,7 +29,7 @@
 
   pushr = push -u origin HEAD
 
-  pushf = push -f
+  pushf = push --force-with-lease
 
   a = add
 
