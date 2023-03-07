@@ -45,9 +45,9 @@
 
   aac = !git add . && git commit
 
-  blt = branch --sort=committerdate
+  blt = branch --sort=-committerdate
 
-  brt = branch --remotes --sort=committerdate
+  brt = branch --remotes --sort=-committerdate
   # brt = ls-remote --heads --sort=committerdate
 
   c = commit
