@@ -364,7 +364,6 @@ complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g 2>/dev/n
 
 # Bash 4+ specific
 # Enable recursive glob, e.g. ls **/*.py
-shopt -s globstar 2>/dev/null
 shopt -s extglob
 
 
