@@ -95,6 +95,9 @@
 
   backup = "!f() { git stash && git checkout -b $(git symbolic-ref --short HEAD 2>/dev/null)-$(date +'%Y%m%d%H%M%S') && git checkout -; }; f"
 
+  root = "rev-parse --show-toplevel"
+
+
 [diff]
   tool=e
 
