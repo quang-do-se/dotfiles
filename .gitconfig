@@ -17,7 +17,7 @@
   filemode = false
 
 [pull]
-  rebase = false # merge (the default strategy)
+  rebase = true # merge (the default strategy)
   ff = only
 
 [alias]
