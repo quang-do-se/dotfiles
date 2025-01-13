@@ -603,7 +603,7 @@
      (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
      (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
-     (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
+     (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\)$" . org-mode))
      (add-to-list 'auto-mode-alist '("\\.inc\\'" . php-mode))
    #+END_SRC
 
