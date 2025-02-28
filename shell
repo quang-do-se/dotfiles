@@ -234,16 +234,9 @@ get_git_prompt() {
     printf " (${current_branch}) ${git_status_count} ${git_stash_count} ${git_conflict_count}" | tr -s " " | sed -e 's/[[:space:]]*$//'
 }
 
-get_vpn_prompt() {
-    is_vpn=$(pgrep -x openconnect)
-
-    if [ $? -eq 0 ]; then
-        printf ' (VPN)'
-    fi
-}
 
 set_bash_prompt() {
-    PS1="${SET}${FG_WHITE}${BG_RED}\u$(get_vpn_prompt)${RESET}${FG_CYAN} \A${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
+    PS1="${SET}${FG_WHITE}${BG_RED}\u${RESET}${FG_CYAN} \A${FG_BRIGHT_GREEN} \w${FG_YELLOW}$(get_git_prompt)${RESET}\n${FG_CYAN}\$${RESET} "
 }
 
 
